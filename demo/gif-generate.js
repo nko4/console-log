@@ -1,6 +1,6 @@
 var async = require('async');
 var GifEncoder = require('gif.js/src/GIFEncoder');
-var imageInfo = require('./phantomjs-image-info');
+var imageInfo = require('../lib/image-info');
 
 var WIDTH = 600;
 var HEIGHT = 392;
@@ -55,10 +55,15 @@ async.map([
     });
   }
 
+  var fn = (drawImage + '')
+            .replace('IMAGE_PATH', __dirname + '/' + filename)
+            .replace('function drawImage(cb) {', '')
+            .replace(/}$/, '');
+
   imageInfo({
     width: WIDTH,
-    height: height,
-    js: (drawImage + '').replace('IMAGE_PATH', __dirname + '/' + filename)
+    height: HEIGHT,
+    js: fn
   }, cb);
 }, function processFrameInfo (err, unparsedDatas) {
   if (err) {
