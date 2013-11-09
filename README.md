@@ -1,3 +1,16 @@
+NES emulator in your terminal.
+
+Tools:
+
+https://github.com/TooTallNate/ansi-canvas
+https://github.com/TooTallNate/keypress
+
+TODO: Grab link for emulator
+
+--------
+
+# Default README
+
 ## Quick Start
 
 ~~~sh
