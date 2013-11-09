@@ -1,3 +1,4 @@
+var fs = require('fs');
 var async = require('async');
 var GifEncoder = require('../lib/gif.js/GIFEncoder');
 var imageInfo = require('../lib/image-info');
@@ -86,7 +87,7 @@ async.map([
     // console.log(len);
 
     // console.log "rendering finished - filesize #{ Math.round(len / 1000) }kb"
-    var data = new Uint8Array(len);
+    var data = new Buffer(len);
     var offset = 0;
     for (i = 0; i < imageParts.length; i++) {
       frame = imageParts[i].out;
@@ -94,7 +95,9 @@ async.map([
         var page = frame.pages[j];
         // console.log(page, offset);
         // console.log(j, offset);
-        data.set(page, offset);
+        for (var k = 0; k < page.length; k++) {
+          data.writeUInt8(page[k], offset + k);
+        }
         if (j === frame.pages.length - 1) {
           offset += frame.cursor;
         } else {
@@ -108,7 +111,9 @@ async.map([
 
   // // console.log(finishRendering());
   var gifData = finishRendering(gif);
-  console.log(gifData);
+  // console.log(gifData);
+
+  fs.writeFileSync(__dirname + '/test.gif', gifData);
 
 
   // global.btoa = require('btoa');
