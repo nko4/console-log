@@ -70,18 +70,18 @@ function convertDataURIToBinary(dataURI) {
 }
 
 // http://stackoverflow.com/questions/16194908/how-can-i-create-a-canvas-imagedata-array-from-an-arraybuffer-representation-of
-// function convertDataURIToBinary(dataURI) {
-//   // uri to Base64
-//   b64 = dataURI.slice(dataURI.indexOf(',')+1);
-//   // to String
-//   str = atob(b64);
-//   // to Array
-//   arr = str.split('').map(function (e) {return e.charCodeAt(0);});
-//   // to Uint8ClampedArray
-//   u = new Uint8ClampedArray(arr); // [255, 56, 201, 8]
+function convertDataURIToBinary(dataURI) {
+  // uri to Base64
+  b64 = dataURI.slice(dataURI.indexOf(',')+1);
+  // to String
+  str = atob(b64);
+  // to Array
+  arr = str.split('').map(function (e) {return e.charCodeAt(0);});
+  // to Uint8ClampedArray
+  u = new Uint8ClampedArray(arr); // [255, 56, 201, 8]
 
-//   return u;
-// }
+  return u;
+}
 
 
 // console.log(convertDataURIToBinary(canvas.toDataURL()));
@@ -94,12 +94,12 @@ function convertDataURIToBinary(dataURI) {
 // }
 
 // var data = convertDataURIToBinary(canvas.toBuffer());
-var data = convertDataURIToBinary(canvas.toDataURL());
+// var data = convertDataURIToBinary(canvas.toDataURL());
+
+
+var data = canvas.toBuffer();
 
 console.log(JSON.stringify([].slice.call(data)));
-
-// var data = canvas.toBuffer();
-
 
 // console.log(data.length);
 
