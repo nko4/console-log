@@ -59,12 +59,18 @@ module.exports = function writeGifToStream(stream) {
     var gif = new GifEncoder(WIDTH, HEIGHT);
 
     // TODO: Optimize streaming events into transactional buffers (e.g. frame)
+    var i = 0;
     function writeToStream(buffer) {
-      stream.write(buffer);
+      setTimeout(function () {
+        stream.write(buffer);
+      }, i * 1000);
+      i += 1;
     }
     gif.on('frame', writeToStream);
     gif.on('end', function () {
-      stream.end();
+      setTimeout(function () {
+        stream.end();
+      }, i * 1000);
     });
 
     gif.on('byte', writeToStream);
