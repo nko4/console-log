@@ -1,4 +1,4 @@
-var phantomjssmith = require('../phantomjssmith-hack');
+var phantomjssmith = require('../phantomjssmith-hack2');
 
 module.exports = function getImageData (image, cb) {
   // Convert images into phantomjssmith objects
