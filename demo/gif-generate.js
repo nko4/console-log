@@ -1,131 +1,38 @@
+var async = require('async');
 var GifEncoder = require('gif.js/src/GIFEncoder');
-// var fs = require('fs');
 var imageInfo = require('./phantomjs-image-info');
-
-// var WIDTH = 200;
-// var HEIGHT = 200;
 
 var WIDTH = 600;
 var HEIGHT = 392;
 
-// var Canvas = require('canvas');
-// var canvas = new Canvas(WIDTH, HEIGHT);
+// TODO: Figure out how to do arbitrary text. Maybe phantomjs server
 
-// var ctx = canvas.getContext('2d');
-
-// var img = new Canvas.Image();
-// img.src = fs.readFileSync(__dirname + '/test1-orig.jpg');
-
-// ctx.drawImage(img, 0, 0);
-
-// ctx.font = '30px Impact';
-// ctx.fillText("Awesome!", 50, 100);
-
-// var te = ctx.measureText('Awesome!');
-// ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-// ctx.beginPath();
-// ctx.lineTo(50, 102);
-// ctx.lineTo(50 + te.width, 102);
-// ctx.stroke();
-
-// console.log('<img src="' + canvas.toDataURL() + '" />');
-// console.log(canvas.toDataURL());
-// var fs = require('fs');
-// fs.writeFileSync(__dirname + '/test.png', canvas.toDataURL().replace('data:image/png;base64,', ''), 'base64');
-
-
-// Load in image-data.json
-// var imageData = require('./image-data');
-// var imageData = require('./image-data2');
-// var data = new Uint8ClampedArray(imageData.length);
-// data.set(imageData);
-// var imgKeys = Object.getOwnPropertyNames(imageData).map(function (int) {
-//   return parseInt(int, 10);
-// });
-// var maxKey = imgKeys.reduce(function (a, b) {
-//   return Math.max(a, b);
-// }, 0);
-// var data = new Uint8ClampedArray(maxKey + 1);
-// for (var i = 0; i < maxKey; i++) {
-//   data[i] = imageData[i];
-// }
-// console.log(data);
-
-// global.atob = require('atob');
-// // Compare to canvas data
-// // https://gist.github.com/borismus/1032746
-// var BASE64_MARKER = ';base64,';
-
-// function convertDataURIToBinary(dataURI) {
-//   var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-//   var base64 = dataURI.substring(base64Index);
-//   // var raw = window.atob(base64);
-//   var raw = atob(base64);
-//   var rawLength = raw.length;
-//   var array = new Uint8ClampedArray(new ArrayBuffer(rawLength));
-
-//   for(i = 0; i < rawLength; i++) {
-//     array[i] = raw.charCodeAt(i);
-//   }
-//   return array;
-// }
-
-// // http://stackoverflow.com/questions/16194908/how-can-i-create-a-canvas-imagedata-array-from-an-arraybuffer-representation-of
-// function convertDataURIToBinary(dataURI) {
-//   // uri to Base64
-//   b64 = dataURI.slice(dataURI.indexOf(',')+1);
-//   // to String
-//   str = atob(b64);
-//   // to Array
-//   arr = str.split('').map(function (e) {return e.charCodeAt(0);});
-//   // to Uint8ClampedArray
-//   u = new Uint8ClampedArray(arr); // [255, 56, 201, 8]
-
-//   return u;
-// }
-
-
-// // console.log(convertDataURIToBinary(canvas.toDataURL()));
-// var buffer = canvas.toBuffer();
-// var data = new Uint8ClampedArray(buffer.length);
-
-// var i = 0;
-// for (; i < data.length; i++) {
-//   data[i] = buffer.readUInt8(i);
-// }
-
-// // var data = convertDataURIToBinary(canvas.toBuffer());
-// var data = convertDataURIToBinary(canvas.toDataURL());
-
-
-// var data = canvas.toBuffer();
-
-// console.log(JSON.stringify([].slice.call(data)));
-
-// fs.writeFileSync(__dirname + '/buffer-test.png', data);
-
-// console.log(data.length);
-
-imageInfo(__dirname + '/test1-orig.jpg', WIDTH, HEIGHT, function (err, dataJson) {
+async.map([
+  'test1-orig.jpg'
+], function getFrameInfo (filename, cb) {
+  imageInfo(__dirname + '/' + filename, WIDTH, HEIGHT, cb);
+}, function processFrameInfo (err, unparsedDatas) {
   if (err) {
     throw err;
   }
 
-  var dataArr = JSON.parse(dataJson);
-  var data = new Uint8ClampedArray(dataArr.length);
-  data.set(dataArr);
+  var parsedDataArr = unparsedDatas.map(function (dataJson) {
+    var dataArr = JSON.parse(dataJson);
+    var data = new Uint8ClampedArray(dataArr.length);
+    data.set(dataArr);
+    return data;
+  });
 
-  // TODO: Output canvas data to gif
-  // Output pre-built image data to gif
+  // Output canvas data to gif
   var gif = new GifEncoder(WIDTH, HEIGHT);
 
   gif.writeHeader();
 
-  gif.addFrame(data);
+  parsedDataArr.forEach(function (data) {
+    gif.addFrame(data);
+  });
 
   gif.finish();
-
-  // console.log(gif.out);
 
   // taken and modified from master/gif.coffee
   finishRendering = function () {
