@@ -8,33 +8,25 @@ module.exports = function writeGifToStream(stream) {
   var HEIGHT = 392;
 
   async.map([
-    'images/anim1.jpg',
-    'images/anim2.jpg',
-    'images/anim3.jpg',
-    'images/anim4.jpg'
-  ], function getFrameInfo (filename, cb) {
+    // 'images/anim1.jpg',
+    // 'images/anim2.jpg',
+    // 'images/anim3.jpg',
+    // 'images/anim4.jpg'
+    'Hello',
+    'Hello World',
+    'Hello World!',
+    'Hello World!!!'
+  ], function getFrameInfo (text, cb) {
     // TODO: Accept canvas as a parameter
     function drawImage(cb) {
-      // Create a new image
-      var img = new Image();
-      img.src = 'IMAGE_PATH';
-
-      // Once the image loads, callback with it
-      img.onload = function () {
-        context.drawImage(img, 0, 0);
-        context.font = '30px Impact';
-        context.fillText('SNOOOOW', 50, 100);
-        cb(null);
-      };
-
-      // If there is an error, callback with it
-      img.onerror = function (err) {
-        cb(err);
-      };
+      context.font = '30px Impact';
+      context.fillStyle = '#FFFFFF';
+      context.fillText('TEXT', 50, 100);
+      cb(null);
     }
 
     var fn = (drawImage + '')
-              .replace('IMAGE_PATH', __dirname + '/' + filename)
+              .replace('TEXT', text)
               .replace('function drawImage(cb) {', '')
               .replace(/}$/, '');
 
@@ -63,14 +55,14 @@ module.exports = function writeGifToStream(stream) {
     function writeToStream(buffer) {
       setTimeout(function () {
         stream.write(buffer);
-      }, i * 1000);
+      }, i * 100);
       i += 1;
     }
     gif.on('frame', writeToStream);
     gif.on('end', function () {
       setTimeout(function () {
         stream.end();
-      }, i * 1000);
+      }, i * 100);
     });
 
     gif.on('byte', writeToStream);
