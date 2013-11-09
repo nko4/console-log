@@ -20,21 +20,27 @@ function getPhantomjsExporter(ext) {
    * @param {Number} [options.quality] Quality of the exported item
    * @param {Function} cb Error-first callback to return binary image string to
    */
-  return function phantomjsExporterFn (options, cb) {
+  return function phantomjsExporterFn (params, cb) {
     var canvas = this.canvas,
         that = this;
 
-    // Convert over all image paths to url paths
-    var images = that.images;
-    images.forEach(function getUrlPath (img) {
-      img = img.img;
-      img._urlpath = path.relative(__dirname + '/scripts', img._filepath);
-    });
+    assert(params.js, 'JS not provided');
+    assert(params.width, 'Width not provided');
+    assert(params.height, 'Height not provided');
 
-    // Collect our parameters
-    var params = that.params;
-    params.images = images;
-    params.options = options;
+    // TODO: Consider passing a function or vanilla JS
+
+    // // Convert over all image paths to url paths
+    // var images = that.images;
+    // images.forEach(function getUrlPath (img) {
+    //   img = img.img;
+    //   img._urlpath = path.relative(__dirname + '/scripts', img._filepath);
+    // });
+
+    // // Collect our parameters
+    // var params = that.params;
+    // params.images = images;
+    // params.options = options;
 
     // Stringify our argument for phantomjs
     var arg = JSON.stringify(params),

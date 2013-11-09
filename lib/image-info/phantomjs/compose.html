@@ -20,7 +20,8 @@
       canvas.width = params.width;
       canvas.height = params.height;
 
-      var fn = new Function(params.src, 'cb');
+      // TODO: This should be compiled by browserify or the canvas interface with a `loadImage` method
+      var fn = new Function('cb', params.src);
 
       fn(function (err) {
         if (err) {
