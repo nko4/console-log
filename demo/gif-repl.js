@@ -22,6 +22,7 @@ function GifDuplex(options) {
 
   // Output canvas data to gif
   var gif = new GifEncoder(width, height);
+  var that = this;
 
   var activeData = [];
   gif.on('data', function (val) {
@@ -30,7 +31,7 @@ function GifDuplex(options) {
   function outputActiveData() {
     var buffer = new Buffer(activeData);
     activeData = [];
-    this.emit('data', buffer);
+    that.emit('data', buffer);
   }
   gif.on('writeHeader#stop', outputActiveData);
   gif.on('frame#stop', outputActiveData);
@@ -38,7 +39,7 @@ function GifDuplex(options) {
     outputActiveData();
 
     gif.on('end', function () {
-      this.emit('end');
+      that.emit('end');
     });
   });
 
