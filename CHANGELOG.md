@@ -1,4 +1,6 @@
 # console-log changelog
+0.4.0 - One more performance squeeze for reduced memory collection
+
 0.3.0 - Moved to series over parallel image data collection
 
 0.2.0 - Removed unnecessary excess memory and thinned out memory model
