@@ -68,7 +68,7 @@ async.map([
   });
 
   // TODO: Optimize streaming events into transactional buffers (e.g. frame)
-  gif.on('data', function (buffer) {
+  gif.on('frame', function (buffer) {
     console.log(stream.write(buffer));
   });
   gif.on('end', function () {
