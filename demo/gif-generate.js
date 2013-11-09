@@ -68,24 +68,29 @@ async.map([
   });
 
   // TODO: Optimize streaming events into transactional buffers (e.g. frame)
-  gif.on('frame', function (buffer) {
-    console.log(stream.write(buffer));
-  });
+  function writeToStream(buffer) {
+    stream.write(buffer);
+  }
+  gif.on('frame', writeToStream);
   gif.on('end', function () {
     stream.end();
   });
 
+  gif.on('byte', writeToStream);
   gif.writeHeader();
 
   gif.setDelay(100);
   gif.setRepeat(0);
   gif.setQuality(10);
+  gif.removeListener('byte', writeToStream);
 
   parsedDataArr.forEach(function (data) {
     gif.addFrame(data);
   });
 
+  gif.on('byte', writeToStream);
   gif.finish();
+  gif.removeListener('byte', writeToStream);
 
   // // taken and modified from master/gif.coffee
   // finishRendering = function (gif) {
