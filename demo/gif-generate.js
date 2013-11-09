@@ -76,6 +76,7 @@ gif.addFrame(data);
 
 // console.log(gif.out);
 
+// taken and modified from master/gif.coffee
 finishRendering = function () {
   var len = 0;
   var imageParts = [gif];
@@ -105,6 +106,25 @@ finishRendering = function () {
 };
 
 // // console.log(finishRendering());
-console.log(finishRendering());
+var gifData = finishRendering();
+global.btoa = require('btoa');
+// from gh-pages/scripts/main.js
+buildDataURL = (function() {
+  var charMap, i, _i;
 
-// console.log(gif.out);
+  charMap = {};
+  for (i = _i = 0; _i < 256; i = ++_i) {
+    charMap[i] = String.fromCharCode(i);
+  }
+  return function(data) {
+    var str, _j, _ref3;
+
+    str = '';
+    for (i = _j = 0, _ref3 = data.length; 0 <= _ref3 ? _j < _ref3 : _j > _ref3; i = 0 <= _ref3 ? ++_j : --_j) {
+      str += charMap[data[i]];
+    }
+    return 'data:image/gif;base64,' + btoa(str);
+  };
+})();
+
+console.log(buildDataURL(gifData));
