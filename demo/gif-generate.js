@@ -28,36 +28,36 @@ var imgKeys = Object.getOwnPropertyNames(imageData).map(function (int) {
 var maxKey = imgKeys.reduce(function (a, b) {
   return Math.max(a, b);
 }, 0);
-var data = new Uint8Array(maxKey);
+var data = new Uint8ClampedArray(maxKey);
 for (var i = 0; i < maxKey; i++) {
   data[i] = imageData[i];
 }
 
-var atob2 = require('atob');
+global.atob = require('atob');
 // Compare to canvas data
 // https://gist.github.com/borismus/1032746
-var BASE64_MARKER = ';base64,';
+// var BASE64_MARKER = ';base64,';
 
-function convertDataURIToBinary(dataURI) {
-  var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-  var base64 = dataURI.substring(base64Index);
-  // var raw = window.atob(base64);
-  var raw = atob2(base64);
-  var rawLength = raw.length;
-  var array = new Uint8ClampedArray(new ArrayBuffer(rawLength));
+// function convertDataURIToBinary(dataURI) {
+//   var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+//   var base64 = dataURI.substring(base64Index);
+//   // var raw = window.atob(base64);
+//   var raw = atob(base64);
+//   var rawLength = raw.length;
+//   var array = new Uint8ClampedArray(new ArrayBuffer(rawLength));
 
-  for(i = 0; i < rawLength; i++) {
-    array[i] = raw.charCodeAt(i);
-  }
-  return array;
-}
+//   for(i = 0; i < rawLength; i++) {
+//     array[i] = raw.charCodeAt(i);
+//   }
+//   return array;
+// }
 
 // http://stackoverflow.com/questions/16194908/how-can-i-create-a-canvas-imagedata-array-from-an-arraybuffer-representation-of
 // function convertDataURIToBinary(dataURI) {
 //   // uri to Base64
 //   b64 = dataURI.slice(dataURI.indexOf(',')+1);
 //   // to String
-//   str = atob2(b64);
+//   str = atob(b64);
 //   // to Array
 //   arr = str.split('').map(function (e) {return e.charCodeAt(0);});
 //   // to Uint8ClampedArray
@@ -65,7 +65,43 @@ function convertDataURIToBinary(dataURI) {
 
 //   return u;
 // }
-console.log(convertDataURIToBinary(canvas.toDataURL()));
+// console.log(convertDataURIToBinary(canvas.toDataURL()));
 // convertDataURIToBinary(canvas.toDataURL());
 
 // TODO: Output canvas data to gif
+// Output pre-built image data to gif
+var gif = new GifEncoder(200, 200);
+
+gif.addFrame(data);
+
+// console.log(gif.out);
+
+// finishRendering = function () {
+//   var len = 0;
+//   var imageParts = gif.frames;
+//   for (var frame in imageParts) {
+//     len += (frame.data.length - 1) * frame.pageSize + frame.cursor;
+//   }
+//   // TODO: Should we be hiding this line?
+//   // len += frame.pageSize - frame.cursor;
+//   // console.log "rendering finished - filesize #{ Math.round(len / 1000) }kb"
+//   var data = new Uint8Array(len);
+//   var offset = 0;
+//   for (frame in imageParts) {
+//     for (var page in frame.data) {
+//       data.set(page, offset);
+//       // TODO: This line is why we hid that line
+//       if (i === frame.data.length - 1) {
+//         offset += frame.cursor;
+//       } else {
+//         offset += frame.pageSize;
+//       }
+//     }
+//   }
+
+//   return data;
+// };
+
+// console.log(finishRendering());
+
+console.log(gif.out);
