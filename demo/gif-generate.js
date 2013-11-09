@@ -85,21 +85,23 @@ function convertDataURIToBinary(dataURI) {
 
 
 // console.log(convertDataURIToBinary(canvas.toDataURL()));
-// var buffer = canvas.toBuffer();
-// var data = new Uint8ClampedArray(buffer.length);
+var buffer = canvas.toBuffer();
+var data = new Uint8ClampedArray(buffer.length);
 
-// var i = 0;
-// for (; i < data.length; i++) {
-//   data[i] = buffer.readUInt8(i);
-// }
+var i = 0;
+for (; i < data.length; i++) {
+  data[i] = buffer.readUInt8(i);
+}
 
 // var data = convertDataURIToBinary(canvas.toBuffer());
 // var data = convertDataURIToBinary(canvas.toDataURL());
 
 
-var data = canvas.toBuffer();
+// var data = canvas.toBuffer();
 
-console.log(JSON.stringify([].slice.call(data)));
+// console.log(JSON.stringify([].slice.call(data)));
+
+fs.writeFileSync(__dirname + '/buffer-test.png', data);
 
 // console.log(data.length);
 
