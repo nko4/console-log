@@ -28,11 +28,10 @@ ctx.drawImage(img, 0, 0);
 // ctx.stroke();
 
 // console.log('<img src="' + canvas.toDataURL() + '" />');
-console.log(canvas.toDataURL());
+// console.log(canvas.toDataURL());
 // var fs = require('fs');
 // fs.writeFileSync(__dirname + '/test.png', canvas.toDataURL().replace('data:image/png;base64,', ''), 'base64');
 
-return;
 
 // Load in image-data.json
 // var imageData = require('./image-data');
@@ -88,7 +87,7 @@ function convertDataURIToBinary(dataURI) {
 // console.log(convertDataURIToBinary(canvas.toDataURL()));
 var data = convertDataURIToBinary(canvas.toDataURL());
 
-console.log(data);
+console.log(data.length);
 
 // TODO: Output canvas data to gif
 // Output pre-built image data to gif
