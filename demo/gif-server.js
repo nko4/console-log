@@ -1,10 +1,10 @@
 var http = require('http');
 var fs = require('fs');
+var gifGenerate = require('./gif-generate');
 
 var app = http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'image/gif'});
-  var gif = fs.createReadStream(__dirname + '/test.gif');
-  gif.pipe(res);
+  gifGenerate(res);
 });
 
 var port = 7000;
