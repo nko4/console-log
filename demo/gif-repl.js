@@ -9,6 +9,7 @@ var GifEncoder = require('../lib/gif.js/GIFEncoder');
 var imageInfo = require('../lib/image-info');
 function noop() {}
 
+// TODO: This should extend from GifEncoder
 function GifDuplex(options) {
   // Inherit from EventEmitter
   EventEmitter.call(this);
@@ -90,6 +91,10 @@ GifDuplex.prototype = extend({
 
       cb(null);
     });
+  },
+  finish: function () {
+    console.log('finish2');
+    this.gif.finish();
   }
 }, EventEmitter.prototype);
 
@@ -108,16 +113,22 @@ if (module.parent === null) {
     if (err) {
       throw err;
     }
+
+    console.log('finish');
+    // Complete the gif
+    gifDuplex.finish();
   });
 
   gifDuplex.on('data', function (buff) {
+    console.log('wrote');
     stream.write(buff);
   });
 
   gifDuplex.on('end', function () {
-    stream.on('finish', function () {
-      console.log('finished');
-      process.exit();
-    });
+    console.log('ended');
+  });
+  stream.on('finish', function () {
+    console.log('finished');
+    process.exit();
   });
 }

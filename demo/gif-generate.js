@@ -29,6 +29,7 @@ module.exports = function writeGifToStream(stream) {
   function outputActiveData() {
     var buffer = new Buffer(activeData);
     activeData = [];
+    console.log('wrote');
     writeToStream(buffer);
   }
   gif.on('writeHeader#stop', outputActiveData);
