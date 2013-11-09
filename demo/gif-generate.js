@@ -76,32 +76,35 @@ gif.addFrame(data);
 
 // console.log(gif.out);
 
-// finishRendering = function () {
-//   var len = 0;
-//   var imageParts = gif.frames;
-//   for (var frame in imageParts) {
-//     len += (frame.data.length - 1) * frame.pageSize + frame.cursor;
-//   }
-//   // TODO: Should we be hiding this line?
-//   // len += frame.pageSize - frame.cursor;
-//   // console.log "rendering finished - filesize #{ Math.round(len / 1000) }kb"
-//   var data = new Uint8Array(len);
-//   var offset = 0;
-//   for (frame in imageParts) {
-//     for (var page in frame.data) {
-//       data.set(page, offset);
-//       // TODO: This line is why we hid that line
-//       if (i === frame.data.length - 1) {
-//         offset += frame.cursor;
-//       } else {
-//         offset += frame.pageSize;
-//       }
-//     }
-//   }
+finishRendering = function () {
+  var len = 0;
+  var imageParts = [gif];
+  var frame;
+  for (var i = 0; i < imageParts.length; i++) {
+    frame = imageParts[i].out;
+    len += (frame.pages.length - 1) * frame.constructor.pageSize + frame.cursor;
+  }
 
-//   return data;
-// };
+  len += frame.constructor.pageSize - frame.cursor;
 
-// console.log(finishRendering());
+  // console.log "rendering finished - filesize #{ Math.round(len / 1000) }kb"
+  var data = new Uint8Array(len);
+  var offset = 0;
+  for (frame in imageParts) {
+    for (var page in frame.pages) {
+      data.set(page, offset);
+      if (i === frame.pages.length - 1) {
+        offset += frame.cursor;
+      } else {
+        offset += frame.constructor.pageSize;
+      }
+    }
+  }
 
-console.log(gif.out);
+  return data;
+};
+
+// // console.log(finishRendering());
+console.log(finishRendering());
+
+// console.log(gif.out);
