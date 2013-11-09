@@ -20,18 +20,19 @@ ctx.stroke();
 // var fs = require('fs');
 // fs.writeFileSync(__dirname + '/test.png', canvas.toDataURL().replace('data:image/png;base64,', ''), 'base64');
 
-// // Load in image-data.json
-// var imageData = require('./image-data');
-// var imgKeys = Object.getOwnPropertyNames(imageData).map(function (int) {
-//   return parseInt(int, 10);
-// });
-// var maxKey = imgKeys.reduce(function (a, b) {
-//   return Math.max(a, b);
-// }, 0);
-// var data = new Uint8ClampedArray(maxKey);
-// for (var i = 0; i < maxKey; i++) {
-//   data[i] = imageData[i];
-// }
+// Load in image-data.json
+var imageData = require('./image-data');
+var imgKeys = Object.getOwnPropertyNames(imageData).map(function (int) {
+  return parseInt(int, 10);
+});
+var maxKey = imgKeys.reduce(function (a, b) {
+  return Math.max(a, b);
+}, 0);
+var data = new Uint8ClampedArray(maxKey + 1);
+for (var i = 0; i < maxKey; i++) {
+  data[i] = imageData[i];
+}
+console.log(data);
 
 global.atob = require('atob');
 // Compare to canvas data
@@ -66,13 +67,14 @@ function convertDataURIToBinary(dataURI) {
 //   return u;
 // }
 // console.log(convertDataURIToBinary(canvas.toDataURL()));
-var data = convertDataURIToBinary(canvas.toDataURL());
+// var data = convertDataURIToBinary(canvas.toDataURL());
 
 // TODO: Output canvas data to gif
 // Output pre-built image data to gif
 var gif = new GifEncoder(200, 200);
 
 gif.addFrame(data);
+gif.finish();
 
 // console.log(gif.out);
 
@@ -88,7 +90,7 @@ finishRendering = function () {
 
   len += frame.constructor.pageSize - frame.cursor;
 
-  console.log(len);
+  // console.log(len);
 
   // console.log "rendering finished - filesize #{ Math.round(len / 1000) }kb"
   var data = new Uint8Array(len);
