@@ -7,11 +7,52 @@ module.exports = function writeGifToStream(stream) {
   var WIDTH = 600;
   var HEIGHT = 392;
 
-  async.map([
-    // 'images/anim1.jpg',
-    // 'images/anim2.jpg',
-    // 'images/anim3.jpg',
-    // 'images/anim4.jpg'
+  // Output canvas data to gif
+  var gif = new GifEncoder(WIDTH, HEIGHT);
+
+  var i = 0;
+  function delay(fn) {
+    // setTimeout(fn, i * 100);
+    fn();
+    i += 1;
+  }
+  function writeToStream(buffer) {
+    delay(function () {
+      stream.write(buffer);
+    });
+  }
+
+  var activeData = [];
+  gif.on('data', function (val) {
+    activeData.push(val);
+  });
+  function outputActiveData() {
+    var buffer = new Buffer(activeData);
+    activeData = [];
+    writeToStream(buffer);
+  }
+  gif.on('writeHeader#stop', outputActiveData);
+  gif.on('frame#stop', outputActiveData);
+  gif.on('finish#stop', function () {
+    outputActiveData();
+
+    gif.on('end', function () {
+      delay(function () {
+        stream.end();
+      });
+    });
+  });
+
+  // Open the gif
+  gif.writeHeader();
+
+  // Configure the gif
+  // gif.setDelay(100);
+  // gif.setRepeat(0);
+  gif.setQuality(10);
+
+
+  async.each([
     'Hello',
     'Hello World',
     'Hello World!',
@@ -34,59 +75,25 @@ module.exports = function writeGifToStream(stream) {
       width: WIDTH,
       height: HEIGHT,
       js: fn
-    }, cb);
-  }, function processFrameInfo (err, unparsedDatas) {
+    }, function parseFrameInfo (err, unparsedJson) {
+      if (err) {
+        return cb(err);
+      }
+
+      var dataArr = JSON.parse(unparsedJson);
+      // TODO: Do we really need to double the memory here?
+      var data = new Uint8ClampedArray(dataArr.length);
+      data.set(dataArr);
+      gif.addFrame(data);
+
+      cb(null);
+    });
+  }, function finishGif (err) {
     if (err) {
       throw err;
     }
 
-    // Output canvas data to gif
-    var gif = new GifEncoder(WIDTH, HEIGHT);
-
-    var i = 0;
-    function writeToStream(buffer) {
-      setTimeout(function () {
-        stream.write(buffer);
-      }, i * 100);
-      i += 1;
-    }
-
-    var activeData = [];
-    gif.on('data', function (val) {
-      activeData.push(val);
-    });
-    function outputActiveData() {
-      var buffer = new Buffer(activeData);
-      activeData = [];
-      stream.write(buffer);
-    }
-    gif.on('writeHeader#stop', outputActiveData);
-    gif.on('frame#stop', outputActiveData);
-    gif.on('finish#stop', outputActiveData);
-
-    gif.on('end', function () {
-      setTimeout(function () {
-        stream.end();
-      }, i * 100);
-    });
-
-    gif.writeHeader();
-
-    // gif.setDelay(100);
-    // gif.setRepeat(0);
-    gif.setQuality(10);
-
-    // TODO: This is an ideal case for generators
-    var parsedDataArr = unparsedDatas.map(function (dataJson) {
-      var dataArr = JSON.parse(dataJson);
-      var data = new Uint8ClampedArray(dataArr.length);
-      data.set(dataArr);
-      return data;
-    });
-    parsedDataArr.forEach(function (data) {
-      gif.addFrame(data);
-    });
-
+    // Complete the gif
     gif.finish();
   });
 };
