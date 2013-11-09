@@ -17,9 +17,18 @@ ctx.lineTo(50 + te.width, 102);
 ctx.stroke();
 
 // console.log('<img src="' + canvas.toDataURL() + '" />');
-var fs = require('fs');
-fs.writeFileSync(__dirname + '/test.png', canvas.toDataURL().replace('data:image/png;base64,', ''), 'base64');
+// var fs = require('fs');
+// fs.writeFileSync(__dirname + '/test.png', canvas.toDataURL().replace('data:image/png;base64,', ''), 'base64');
 
-// TODO: Load in image-data.json
+// Load in image-data.json
+var imageData = require('./image-data');
+var imgKeys = Object.getOwnPropertyNames(imageData).map(function (int) {
+  return parseInt(int, 10);
+});
+var maxKey = imgKeys.reduce(function (a, b) {
+  return Math.max(a, b);
+}, 0);
+console.log(maxKey);
+
 // TODO: Compare to canvas data
 // TODO: Output canvas data to gif
