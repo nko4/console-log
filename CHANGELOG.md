@@ -1,4 +1,6 @@
 # console-log changelog
+0.1.0 - Touched up server and deployed working gif to servers
+
 0.0.13 - Moved output from image to text
 
 0.0.12 - Completed server which is streaming out parts of gif slowly
