@@ -14,45 +14,24 @@ async.map([
   'images/anim3.jpg',
   'images/anim4.jpg'
 ], function getFrameInfo (filename, cb) {
+  // TODO: Accept canvas as a parameter
   function drawImage(cb) {
-    // Load the images in parallel
-    var imageObjs = [{
-      path: 'IMAGE_PATH',
-      x: 0,
-      y: 0
-    }];
-    async.each(imageObjs, function (imageObj, cb) {
-      // Create an image and specify the source
-      var img = new Image();
-      img.src = imageObj.path;
+    // Create a new image
+    var img = new Image();
+    img.src = 'IMAGE_PATH';
 
-      // Save the image for later
-      imageObj._img = img;
-
-      // Once the image loads, callback with it
-      img.onload = function () {
-        cb(null, img);
-      };
-
-      // If there is an error, callback with it
-      img.onerror = function (err) {
-        cb(err);
-      };
-    }, function imagesLoaded (err) {
-      // If there was an error, throw it
-      if (err) {
-        console.error('Error loading image ', err);
-        return cb(err);
-      }
-
-      // Draw the images on the canvas
-      imageObjs.forEach(function drawImage (img) {
-        context.drawImage(img._img, img.x, img.y);
-      });
-
-      // Continue
+    // Once the image loads, callback with it
+    img.onload = function () {
+      context.drawImage(img, 0, 0);
+      context.font = '30px Impact';
+      context.fillText('SNOOOOW', 50, 100);
       cb(null);
-    });
+    };
+
+    // If there is an error, callback with it
+    img.onerror = function (err) {
+      cb(err);
+    };
   }
 
   var fn = (drawImage + '')
