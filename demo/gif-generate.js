@@ -40,17 +40,9 @@ module.exports = function writeGifToStream(stream) {
       throw err;
     }
 
-    var parsedDataArr = unparsedDatas.map(function (dataJson) {
-      var dataArr = JSON.parse(dataJson);
-      var data = new Uint8ClampedArray(dataArr.length);
-      data.set(dataArr);
-      return data;
-    });
-
     // Output canvas data to gif
     var gif = new GifEncoder(WIDTH, HEIGHT);
 
-    // TODO: Optimize streaming events into transactional buffers (e.g. frame)
     var i = 0;
     function writeToStream(buffer) {
       setTimeout(function () {
@@ -58,28 +50,44 @@ module.exports = function writeGifToStream(stream) {
       }, i * 100);
       i += 1;
     }
-    gif.on('frame', writeToStream);
+
+    var activeData = [];
+    gif.on('data', function (val) {
+      activeData.push(val);
+    });
+    function outputActiveData() {
+      var buffer = new Buffer(activeData);
+      activeData = [];
+      stream.write(buffer);
+    }
+    gif.on('writeHeader#stop', outputActiveData);
+    gif.on('frame#stop', outputActiveData);
+    gif.on('finish#stop', outputActiveData);
+
     gif.on('end', function () {
       setTimeout(function () {
         stream.end();
       }, i * 100);
     });
 
-    gif.on('byte', writeToStream);
     gif.writeHeader();
 
     // gif.setDelay(100);
     // gif.setRepeat(0);
     gif.setQuality(10);
-    gif.removeListener('byte', writeToStream);
 
+    // TODO: This is an ideal case for generators
+    var parsedDataArr = unparsedDatas.map(function (dataJson) {
+      var dataArr = JSON.parse(dataJson);
+      var data = new Uint8ClampedArray(dataArr.length);
+      data.set(dataArr);
+      return data;
+    });
     parsedDataArr.forEach(function (data) {
       gif.addFrame(data);
     });
 
-    gif.on('byte', writeToStream);
     gif.finish();
-    gif.removeListener('byte', writeToStream);
   });
 };
 
