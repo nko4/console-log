@@ -28,7 +28,25 @@ var imgKeys = Object.getOwnPropertyNames(imageData).map(function (int) {
 var maxKey = imgKeys.reduce(function (a, b) {
   return Math.max(a, b);
 }, 0);
-console.log(maxKey);
 
-// TODO: Compare to canvas data
+// Compare to canvas data
+// https://gist.github.com/borismus/1032746
+var BASE64_MARKER = ';base64,';
+
+var atob2 = require('atob');
+function convertDataURIToBinary(dataURI) {
+  var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+  var base64 = dataURI.substring(base64Index);
+  // var raw = window.atob(base64);
+  var raw = atob2(base64);
+  var rawLength = raw.length;
+  var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+  for(i = 0; i < rawLength; i++) {
+    array[i] = raw.charCodeAt(i);
+  }
+  return array;
+}
+console.log(convertDataURIToBinary(canvas.toDataURL()));
+
 // TODO: Output canvas data to gif
