@@ -79,6 +79,7 @@ module.exports = function writeGifToStream(stream) {
         return cb(err);
       }
 
+      var start = Date.now();
       // TODO: Do we really need to double the memory here?
       // TODO: Can imageInfo stream out data?
       // TODO: Is this our proper bottleneck?
@@ -86,6 +87,11 @@ module.exports = function writeGifToStream(stream) {
       var data = new Uint8ClampedArray(dataArr.length);
       data.set(dataArr);
       gif.addFrame(data);
+
+      // var dataArr = JSON.parse(unparsedJson);
+      // gif.addFrame(dataArr);
+
+      console.log(Date.now() - start);
 
       cb(null);
     });
