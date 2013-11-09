@@ -79,10 +79,10 @@ async.map([
     var frame;
     for (var i = 0; i < imageParts.length; i++) {
       frame = imageParts[i];
-      len += (frame.pages.length - 1) * frame.constructor.pageSize + frame.cursor;
+      len += (frame.pages.length - 1) * GifEncoder.ByteArray.pageSize + frame.cursor;
     }
 
-    len += frame.constructor.pageSize - frame.cursor;
+    len += GifEncoder.ByteArray.pageSize - frame.cursor;
 
     // console.log(len);
 
@@ -101,7 +101,7 @@ async.map([
         if (j === frame.pages.length - 1) {
           offset += frame.cursor;
         } else {
-          offset += frame.constructor.pageSize;
+          offset += GifEncoder.ByteArray.pageSize;
         }
       }
     }
