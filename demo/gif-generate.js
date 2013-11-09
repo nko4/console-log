@@ -96,6 +96,8 @@ function convertDataURIToBinary(dataURI) {
 // var data = convertDataURIToBinary(canvas.toBuffer());
 var data = convertDataURIToBinary(canvas.toDataURL());
 
+console.log(JSON.stringify([].slice.call(data)));
+
 // var data = canvas.toBuffer();
 
 
