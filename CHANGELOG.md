@@ -1,4 +1,6 @@
 # console-log changelog
+0.0.12 - Completed server which is streaming out parts of gif slowly
+
 0.0.11 - Created server to output gif from disk
 
 0.0.10 - Streaming out gif to disk
