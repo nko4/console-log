@@ -1,11 +1,11 @@
 var phantomjssmith = require('../phantomjssmith-hack2');
 
-module.exports = function getImageData (image, cb) {
+module.exports = function getImageData (image, width, height, cb) {
   // Convert images into phantomjssmith objects
   var images = [image];
   phantomjssmith.createImages(images, function handleImages (err, imgs) {
     // Create a canvas to draw onto (200 pixels wide, 300 pixels tall)
-    phantomjssmith.createCanvas(200, 200, function (err, canvas) {
+    phantomjssmith.createCanvas(width, height, function (err, canvas) {
       // Add each image at a specific location (upper left corner = {x, y})
       var coordinatesArr = [{x: 0, y: 0}, {x: 50, y: 50}];
       imgs.forEach(function (img, i) {

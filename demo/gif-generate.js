@@ -106,7 +106,7 @@ var HEIGHT = 392;
 
 // console.log(data.length);
 
-imageInfo(__dirname + '/test1-orig.jpg', function (err, dataJson) {
+imageInfo(__dirname + '/test1-orig.jpg', WIDTH, HEIGHT, function (err, dataJson) {
   if (err) {
     throw err;
   }
