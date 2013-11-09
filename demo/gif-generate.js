@@ -19,3 +19,7 @@ ctx.stroke();
 // console.log('<img src="' + canvas.toDataURL() + '" />');
 var fs = require('fs');
 fs.writeFileSync(__dirname + '/test.png', canvas.toDataURL().replace('data:image/png;base64,', ''), 'base64');
+
+// TODO: Load in image-data.json
+// TODO: Compare to canvas data
+// TODO: Output canvas data to gif
