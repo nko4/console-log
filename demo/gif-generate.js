@@ -78,7 +78,7 @@ async.map([
     var imageParts = [gif];
     var frame;
     for (var i = 0; i < imageParts.length; i++) {
-      frame = imageParts[i].out;
+      frame = imageParts[i];
       len += (frame.pages.length - 1) * frame.constructor.pageSize + frame.cursor;
     }
 
@@ -90,7 +90,7 @@ async.map([
     var data = new Buffer(len);
     var offset = 0;
     for (i = 0; i < imageParts.length; i++) {
-      frame = imageParts[i].out;
+      frame = imageParts[i];
       for (var j = 0; j < frame.pages.length; j++) {
         var page = frame.pages[j];
         // console.log(page, offset);
