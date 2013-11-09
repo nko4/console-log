@@ -12,20 +12,17 @@ var y = 0;
 
 var fps = 0;
 var now, lastUpdate = new Date();
-// The higher this value, the less the FPS will be affected by quick changes
-// Setting this to 1 will show you the FPS of the last sampled frame only
-var fpsFilter = 20;
 
 function render () {
 
   // console.log('hai');
 
-  // // clear previous data
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // clear previous data
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // // black background
-  // ctx.fillStyle = 'black';
-  // ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // black background
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // // print height and width
   // ctx.font = '12px Arial';
@@ -36,17 +33,17 @@ function render () {
 
   // frames per second
   var thisFrameFPS = 1000 / ((now = new Date()) - lastUpdate);
-  fps += (thisFrameFPS - fps) / fpsFilter;
+  fps += (thisFrameFPS - fps);
   lastUpdate = now;
-  console.log(fps.toFixed(2));
+  // console.log(fps.toFixed(2));
 
-  // ctx.font = '10px Arial';
-  // ctx.textBaseline = 'top';
-  // ctx.fillStyle = 'blue';
-  // ctx.fillText('FPS: ' + fps.toFixed(2), 0, 30);
+  ctx.font = '10px Arial';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = 'blue';
+  ctx.fillText('FPS: ' + fps.toFixed(2), 0, 30);
 
-  // // render to TTY
-  // canvas.render();
+  // render to TTY
+  canvas.render();
 }
 
 process.stdout.on('resize', render);
@@ -55,7 +52,7 @@ setInterval(render, 1000 / 60); // 60hz
 //render();
 
 function show () {
-  require('ansi')(process.stdout).show();
+  // require('ansi')(process.stdout).show();
   process.exit();
 }
 process.on('exit', show);

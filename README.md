@@ -7,6 +7,21 @@ https://github.com/TooTallNate/keypress
 
 TODO: Grab link for emulator
 
+Backup ideas:
+
+- https://twitter.com/twolfsn/status/385950285970948096
+    - NKO idea: Port gifsockets to node https://github.com/videlalvaro/gifsockets
+- https://twitter.com/twolfsn/status/381485717525782528
+    - Another NKO idea: SASS/SCSS compiler in JS. All current implementations are C bindings or unmaintained.
+- https://twitter.com/twolfsn/status/384596929176281088
+    - NKO idea: Side-by-side REPL for node (a la firebug)
+- https://twitter.com/twolfsn/status/380384271094923264
+    - Another NKO idea: Browser GUI in the terminal
+- https://twitter.com/twolfsn/status/380187933380079617
+    - NKO ideas thus far:
+        - jQuery to vanilla DOM transpiler
+        - NES emulator in terminal
+
 --------
 
 # Default README
