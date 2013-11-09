@@ -1,30 +1,44 @@
-// Image from http://i1.ytimg.com/vi/QH2-TGUlwu4/hqdefault.jpg
 var GifEncoder = require('gif.js/src/GIFEncoder');
+var fs = require('fs');
+
+// var WIDTH = 200;
+// var HEIGHT = 200;
+
+var WIDTH = 600;
+var HEIGHT = 392;
 
 var Canvas = require('canvas');
-var canvas = new Canvas(200, 200);
+var canvas = new Canvas(WIDTH, HEIGHT);
 
 var ctx = canvas.getContext('2d');
 
-ctx.font = '30px Impact';
-ctx.fillText("Awesome!", 50, 100);
+var img = new Canvas.Image();
+img.src = fs.readFileSync(__dirname + '/test1-orig.jpg');
 
-var te = ctx.measureText('Awesome!');
-ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-ctx.beginPath();
-ctx.lineTo(50, 102);
-ctx.lineTo(50 + te.width, 102);
-ctx.stroke();
+ctx.drawImage(img, 0, 0);
+
+// ctx.font = '30px Impact';
+// ctx.fillText("Awesome!", 50, 100);
+
+// var te = ctx.measureText('Awesome!');
+// ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+// ctx.beginPath();
+// ctx.lineTo(50, 102);
+// ctx.lineTo(50 + te.width, 102);
+// ctx.stroke();
 
 // console.log('<img src="' + canvas.toDataURL() + '" />');
+console.log(canvas.toDataURL());
 // var fs = require('fs');
 // fs.writeFileSync(__dirname + '/test.png', canvas.toDataURL().replace('data:image/png;base64,', ''), 'base64');
 
+return;
+
 // Load in image-data.json
 // var imageData = require('./image-data');
-var imageData = require('./image-data2');
-var data = new Uint8ClampedArray(imageData.length);
-data.set(imageData);
+// var imageData = require('./image-data2');
+// var data = new Uint8ClampedArray(imageData.length);
+// data.set(imageData);
 // var imgKeys = Object.getOwnPropertyNames(imageData).map(function (int) {
 //   return parseInt(int, 10);
 // });
@@ -69,13 +83,16 @@ function convertDataURIToBinary(dataURI) {
 
 //   return u;
 // }
+
+
 // console.log(convertDataURIToBinary(canvas.toDataURL()));
-// var data = convertDataURIToBinary(canvas.toDataURL());
+var data = convertDataURIToBinary(canvas.toDataURL());
+
+console.log(data);
 
 // TODO: Output canvas data to gif
 // Output pre-built image data to gif
-// var gif = new GifEncoder(200, 200);
-var gif = new GifEncoder(600, 392);
+var gif = new GifEncoder(WIDTH, HEIGHT);
 
 gif.writeHeader();
 
@@ -142,5 +159,4 @@ buildDataURL = (function() {
   };
 })();
 
-console.log(buildDataURL(gifData));
-
+// console.log(buildDataURL(gifData));
