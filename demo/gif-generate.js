@@ -94,14 +94,14 @@ for (; i < data.length; i++) {
 }
 
 // var data = convertDataURIToBinary(canvas.toBuffer());
-// var data = convertDataURIToBinary(canvas.toDataURL());
+var data = convertDataURIToBinary(canvas.toDataURL());
 
 
 // var data = canvas.toBuffer();
 
 // console.log(JSON.stringify([].slice.call(data)));
 
-fs.writeFileSync(__dirname + '/buffer-test.png', data);
+// fs.writeFileSync(__dirname + '/buffer-test.png', data);
 
 // console.log(data.length);
 
@@ -174,4 +174,4 @@ buildDataURL = (function() {
   };
 })();
 
-// console.log(buildDataURL(gifData));
+console.log(buildDataURL(gifData));

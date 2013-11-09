@@ -13,7 +13,7 @@
   "dependencies": {
     "nko": "*",
     "gif.js": "jnordberg/gif.js#faee238",
-    "canvas": "~1.1.2",
+    "canvas": "~1.0.4",
     "atob": "~1.1.0",
     "btoa": "~1.1.1"
   },
