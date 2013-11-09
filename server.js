@@ -5,7 +5,7 @@ var isProduction = (process.env.NODE_ENV === 'production');
 var http = require('http');
 var port = (isProduction ? 80 : 8000);
 
-require('../demo/gif-server')(port);
+require('./demo/gif-server')(port);
 
 
 // http.createServer(function (req, res) {
