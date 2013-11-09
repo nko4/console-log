@@ -20,37 +20,37 @@ ctx.stroke();
 // var fs = require('fs');
 // fs.writeFileSync(__dirname + '/test.png', canvas.toDataURL().replace('data:image/png;base64,', ''), 'base64');
 
-// Load in image-data.json
-var imageData = require('./image-data');
-var imgKeys = Object.getOwnPropertyNames(imageData).map(function (int) {
-  return parseInt(int, 10);
-});
-var maxKey = imgKeys.reduce(function (a, b) {
-  return Math.max(a, b);
-}, 0);
-var data = new Uint8ClampedArray(maxKey);
-for (var i = 0; i < maxKey; i++) {
-  data[i] = imageData[i];
-}
+// // Load in image-data.json
+// var imageData = require('./image-data');
+// var imgKeys = Object.getOwnPropertyNames(imageData).map(function (int) {
+//   return parseInt(int, 10);
+// });
+// var maxKey = imgKeys.reduce(function (a, b) {
+//   return Math.max(a, b);
+// }, 0);
+// var data = new Uint8ClampedArray(maxKey);
+// for (var i = 0; i < maxKey; i++) {
+//   data[i] = imageData[i];
+// }
 
 global.atob = require('atob');
 // Compare to canvas data
 // https://gist.github.com/borismus/1032746
-// var BASE64_MARKER = ';base64,';
+var BASE64_MARKER = ';base64,';
 
-// function convertDataURIToBinary(dataURI) {
-//   var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-//   var base64 = dataURI.substring(base64Index);
-//   // var raw = window.atob(base64);
-//   var raw = atob(base64);
-//   var rawLength = raw.length;
-//   var array = new Uint8ClampedArray(new ArrayBuffer(rawLength));
+function convertDataURIToBinary(dataURI) {
+  var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+  var base64 = dataURI.substring(base64Index);
+  // var raw = window.atob(base64);
+  var raw = atob(base64);
+  var rawLength = raw.length;
+  var array = new Uint8ClampedArray(new ArrayBuffer(rawLength));
 
-//   for(i = 0; i < rawLength; i++) {
-//     array[i] = raw.charCodeAt(i);
-//   }
-//   return array;
-// }
+  for(i = 0; i < rawLength; i++) {
+    array[i] = raw.charCodeAt(i);
+  }
+  return array;
+}
 
 // http://stackoverflow.com/questions/16194908/how-can-i-create-a-canvas-imagedata-array-from-an-arraybuffer-representation-of
 // function convertDataURIToBinary(dataURI) {
@@ -66,7 +66,7 @@ global.atob = require('atob');
 //   return u;
 // }
 // console.log(convertDataURIToBinary(canvas.toDataURL()));
-// convertDataURIToBinary(canvas.toDataURL());
+var data = convertDataURIToBinary(canvas.toDataURL());
 
 // TODO: Output canvas data to gif
 // Output pre-built image data to gif
@@ -87,6 +87,8 @@ finishRendering = function () {
   }
 
   len += frame.constructor.pageSize - frame.cursor;
+
+  console.log(len);
 
   // console.log "rendering finished - filesize #{ Math.round(len / 1000) }kb"
   var data = new Uint8Array(len);
@@ -127,4 +129,4 @@ buildDataURL = (function() {
   };
 })();
 
-console.log(buildDataURL(gifData));
+// console.log(buildDataURL(gifData));
