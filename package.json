@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "nko": "*",
-    "keypress": "~0.2.1"
+    "keypress": "~0.2.1",
+    "ansi-canvas": "0.0.2"
   },
   "engines": {
     "node": "0.10.x"
