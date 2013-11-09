@@ -60,6 +60,17 @@ async.map([
   // Output canvas data to gif
   var gif = new GifEncoder(WIDTH, HEIGHT);
 
+  var stream = fs.createWriteStream(__dirname + '/test.gif');
+
+  // TODO: Optimize streaming events into transactional buffers (e.g. frame)
+  gif.on('data', function (buffer) {
+    stream.write(buffer);
+  });
+  gif.on('end', function () {
+    stream.end();
+    process.exit();
+  });
+
   gif.writeHeader();
 
   gif.setDelay(100);
@@ -72,46 +83,46 @@ async.map([
 
   gif.finish();
 
-  // taken and modified from master/gif.coffee
-  finishRendering = function (gif) {
-    var len = 0;
-    var imageParts = [gif];
-    var frame;
-    for (var i = 0; i < imageParts.length; i++) {
-      frame = imageParts[i];
-      len += (frame.pages.length - 1) * GifEncoder.ByteArray.pageSize + frame.cursor;
-    }
+  // // taken and modified from master/gif.coffee
+  // finishRendering = function (gif) {
+  //   var len = 0;
+  //   var imageParts = [gif];
+  //   var frame;
+  //   for (var i = 0; i < imageParts.length; i++) {
+  //     frame = imageParts[i];
+  //     len += (frame.pages.length - 1) * GifEncoder.ByteArray.pageSize + frame.cursor;
+  //   }
 
-    len += GifEncoder.ByteArray.pageSize - frame.cursor;
+  //   len += GifEncoder.ByteArray.pageSize - frame.cursor;
 
-    // console.log(len);
+  //   // console.log(len);
 
-    // console.log "rendering finished - filesize #{ Math.round(len / 1000) }kb"
-    var data = new Buffer(len);
-    var offset = 0;
-    for (i = 0; i < imageParts.length; i++) {
-      frame = imageParts[i];
-      for (var j = 0; j < frame.pages.length; j++) {
-        var page = frame.pages[j];
-        // console.log(page, offset);
-        // console.log(j, offset);
-        for (var k = 0; k < page.length; k++) {
-          data.writeUInt8(page[k], offset + k);
-        }
-        if (j === frame.pages.length - 1) {
-          offset += frame.cursor;
-        } else {
-          offset += GifEncoder.ByteArray.pageSize;
-        }
-      }
-    }
+  //   // console.log "rendering finished - filesize #{ Math.round(len / 1000) }kb"
+  //   var data = new Buffer(len);
+  //   var offset = 0;
+  //   for (i = 0; i < imageParts.length; i++) {
+  //     frame = imageParts[i];
+  //     for (var j = 0; j < frame.pages.length; j++) {
+  //       var page = frame.pages[j];
+  //       // console.log(page, offset);
+  //       // console.log(j, offset);
+  //       for (var k = 0; k < page.length; k++) {
+  //         data.writeUInt8(page[k], offset + k);
+  //       }
+  //       if (j === frame.pages.length - 1) {
+  //         offset += frame.cursor;
+  //       } else {
+  //         offset += GifEncoder.ByteArray.pageSize;
+  //       }
+  //     }
+  //   }
 
-    return data;
-  };
+  //   return data;
+  // };
 
   // // console.log(finishRendering());
-  var gifData = finishRendering(gif);
+  // var gifData = finishRendering(gif);
   // console.log(gifData);
 
-  fs.writeFileSync(__dirname + '/test.gif', gifData);
+  // fs.writeFileSync(__dirname + '/test.gif', gifData);
 });
