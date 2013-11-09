@@ -14,7 +14,7 @@ module.exports = function gifServer (port) {
   });
 
   app.listen(port);
-  console.log('gifsockets server is listening at http://127.0.0.1:7000/');
+  console.log('gifsockets server is listening at http://127.0.0.1:' + port + '/');
 };
 
 if (module.parent === null) {
