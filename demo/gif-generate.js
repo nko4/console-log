@@ -32,7 +32,7 @@ var data = new Uint8ClampedArray(maxKey + 1);
 for (var i = 0; i < maxKey; i++) {
   data[i] = imageData[i];
 }
-console.log(data);
+// console.log(data);
 
 global.atob = require('atob');
 // Compare to canvas data
@@ -95,10 +95,12 @@ finishRendering = function () {
   // console.log "rendering finished - filesize #{ Math.round(len / 1000) }kb"
   var data = new Uint8Array(len);
   var offset = 0;
-  for (frame in imageParts) {
-    for (var page in frame.pages) {
+  for (i = 0; i < imageParts.length; i++) {
+    frame = imageParts[i].out;
+    for (var j = 0; j < frame.pages.length; j++) {
+      var page = frame.pages[j];
       data.set(page, offset);
-      if (i === frame.pages.length - 1) {
+      if (j === frame.pages.length - 1) {
         offset += frame.cursor;
       } else {
         offset += frame.constructor.pageSize;
@@ -131,4 +133,4 @@ buildDataURL = (function() {
   };
 })();
 
-// console.log(buildDataURL(gifData));
+console.log(buildDataURL(gifData));
