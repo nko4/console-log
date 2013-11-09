@@ -1,4 +1,6 @@
 # console-log changelog
+0.0.8 - Writing gif as a buffer to disk (over uint8array)
+
 0.0.7 - Writing text to canvas
 
 0.0.6 - Moved on to eval based canvas
