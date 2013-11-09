@@ -8,7 +8,11 @@ var HEIGHT = 392;
 // TODO: Figure out how to do arbitrary text. Maybe phantomjs server
 
 async.map([
-  'test1-orig.jpg'
+  // 'test1-orig.jpg'
+  'images/anim1.jpg',
+  'images/anim2.jpg',
+  'images/anim3.jpg',
+  'images/anim4.jpg'
 ], function getFrameInfo (filename, cb) {
   imageInfo(__dirname + '/' + filename, WIDTH, HEIGHT, cb);
 }, function processFrameInfo (err, unparsedDatas) {
