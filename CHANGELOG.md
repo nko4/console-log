@@ -1,4 +1,6 @@
 # console-log changelog
+0.0.6 - Moved on to eval based canvas
+
 0.0.5 - Generating a looping animated GIF
 
 0.0.4 - Generating a GIF from image via phantomjs canvas
