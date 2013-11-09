@@ -12,8 +12,7 @@
   },
   "dependencies": {
     "nko": "*",
-    "keypress": "~0.2.1",
-    "ansi-canvas": "0.0.2"
+    "gif.js": "jnordberg/gif.js#faee238"
   },
   "engines": {
     "node": "0.10.x"
