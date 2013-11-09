@@ -32,6 +32,10 @@ async.map([
 
   gif.writeHeader();
 
+  gif.setDelay(100);
+  gif.setRepeat(0);
+  gif.setQuality(10);
+
   parsedDataArr.forEach(function (data) {
     gif.addFrame(data);
   });
