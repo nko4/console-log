@@ -32,7 +32,10 @@ function GifDuplex(options) {
   function outputActiveData() {
     var buffer = new Buffer(activeData);
     activeData = [];
-    that.emit('data', buffer);
+    // TODO: This is here because we writeHeader on init
+    process.nextTick(function () {
+      that.emit('data', buffer);
+    });
   }
   gif.on('writeHeader#stop', outputActiveData);
   gif.on('frame#stop', outputActiveData);
@@ -93,7 +96,6 @@ GifDuplex.prototype = extend({
     });
   },
   finish: function () {
-    console.log('finish2');
     this.gif.finish();
   }
 }, EventEmitter.prototype);
@@ -114,21 +116,11 @@ if (module.parent === null) {
       throw err;
     }
 
-    console.log('finish');
     // Complete the gif
     gifDuplex.finish();
   });
 
   gifDuplex.on('data', function (buff) {
-    console.log('wrote');
     stream.write(buff);
-  });
-
-  gifDuplex.on('end', function () {
-    console.log('ended');
-  });
-  stream.on('finish', function () {
-    console.log('finished');
-    process.exit();
   });
 }
