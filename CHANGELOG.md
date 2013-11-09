@@ -1,4 +1,6 @@
 # console-log changelog
+0.0.7 - Writing text to canvas
+
 0.0.6 - Moved on to eval based canvas
 
 0.0.5 - Generating a looping animated GIF
