@@ -80,6 +80,8 @@ module.exports = function writeGifToStream(stream) {
       }
 
       // TODO: Do we really need to double the memory here?
+      // TODO: Can imageInfo stream out data?
+      // TODO: Is this our proper bottleneck?
       var dataArr = JSON.parse(unparsedJson);
       var data = new Uint8ClampedArray(dataArr.length);
       data.set(dataArr);
