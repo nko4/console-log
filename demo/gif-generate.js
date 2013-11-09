@@ -68,8 +68,8 @@ module.exports = function writeGifToStream(stream) {
     gif.on('byte', writeToStream);
     gif.writeHeader();
 
-    gif.setDelay(100);
-    gif.setRepeat(0);
+    // gif.setDelay(100);
+    // gif.setRepeat(0);
     gif.setQuality(10);
     gif.removeListener('byte', writeToStream);
 
