@@ -79,8 +79,8 @@ module.exports = function writeGifToStream(stream) {
         return cb(err);
       }
 
-      var dataArr = JSON.parse(unparsedJson);
       // TODO: Do we really need to double the memory here?
+      var dataArr = JSON.parse(unparsedJson);
       var data = new Uint8ClampedArray(dataArr.length);
       data.set(dataArr);
       gif.addFrame(data);
