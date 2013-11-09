@@ -51,8 +51,7 @@ module.exports = function writeGifToStream(stream) {
   // gif.setRepeat(0);
   gif.setQuality(10);
 
-
-  async.each([
+  async.eachSeries([
     'Hello',
     'Hello World',
     'Hello World!',
