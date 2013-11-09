@@ -55,19 +55,19 @@ global.atob = require('atob');
 // https://gist.github.com/borismus/1032746
 var BASE64_MARKER = ';base64,';
 
-// function convertDataURIToBinary(dataURI) {
-//   var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-//   var base64 = dataURI.substring(base64Index);
-//   // var raw = window.atob(base64);
-//   var raw = atob(base64);
-//   var rawLength = raw.length;
-//   var array = new Uint8ClampedArray(new ArrayBuffer(rawLength));
+function convertDataURIToBinary(dataURI) {
+  var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+  var base64 = dataURI.substring(base64Index);
+  // var raw = window.atob(base64);
+  var raw = atob(base64);
+  var rawLength = raw.length;
+  var array = new Uint8ClampedArray(new ArrayBuffer(rawLength));
 
-//   for(i = 0; i < rawLength; i++) {
-//     array[i] = raw.charCodeAt(i);
-//   }
-//   return array;
-// }
+  for(i = 0; i < rawLength; i++) {
+    array[i] = raw.charCodeAt(i);
+  }
+  return array;
+}
 
 // http://stackoverflow.com/questions/16194908/how-can-i-create-a-canvas-imagedata-array-from-an-arraybuffer-representation-of
 // function convertDataURIToBinary(dataURI) {
@@ -85,16 +85,19 @@ var BASE64_MARKER = ';base64,';
 
 
 // console.log(convertDataURIToBinary(canvas.toDataURL()));
-var buffer = canvas.toBuffer();
-var data = new Uint8ClampedArray(buffer.length);
+// var buffer = canvas.toBuffer();
+// var data = new Uint8ClampedArray(buffer.length);
 
-var i = 0;
-for (; i < data.length; i++) {
-  data[i] = buffer.readUInt8(i);
-}
+// var i = 0;
+// for (; i < data.length; i++) {
+//   data[i] = buffer.readUInt8(i);
+// }
 
 // var data = convertDataURIToBinary(canvas.toBuffer());
-// var data = convertDataURIToBinary(canvas.toDataURL());
+var data = convertDataURIToBinary(canvas.toDataURL());
+
+// var data = canvas.toBuffer();
+
 
 // console.log(data.length);
 
@@ -167,4 +170,4 @@ buildDataURL = (function() {
   };
 })();
 
-console.log(buildDataURL(gifData));
+// console.log(buildDataURL(gifData));
