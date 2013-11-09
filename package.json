@@ -15,7 +15,12 @@
     "gif.js": "jnordberg/gif.js#faee238",
     "canvas": "~1.0.4",
     "atob": "~1.1.0",
-    "btoa": "~1.1.1"
+    "btoa": "~1.1.1",
+    "obj-extend": "~0.1.0",
+    "temporary": "0.0.5",
+    "async": "~0.2.7",
+    "which": "~1.0.5",
+    "shell-quote": "~1.4.0"
   },
   "engines": {
     "node": "0.10.x"
