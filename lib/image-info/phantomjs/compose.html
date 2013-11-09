@@ -17,9 +17,7 @@
       // TODO: or suck it up and deal with async
       var encodedArg = document.cookie.replace('PARAMS=', ''),
           arg = decodeURIComponent(encodedArg),
-        c = console.log(arg),
           params = JSON.parse(arg);
-
 
       // Set the canvas dimensions
       canvas.width = params.width;
