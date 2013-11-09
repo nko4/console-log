@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 
 var async = require('async');
+var extend = require('obj-extend');
 
 var GifEncoder = require('../lib/gif.js/GIFEncoder');
 var imageInfo = require('../lib/image-info');
@@ -53,8 +54,7 @@ function GifDuplex(options) {
   // Save gif for methods
   this.gif = gif;
 }
-util.inherits(GifDuplex, EventEmitter);
-GifDuplex.prototype = {
+GifDuplex.prototype = extend({
   writeTextFrame: function (text, cb) {
     function drawImage(cb) {
       context.font = '30px Impact';
@@ -90,7 +90,7 @@ GifDuplex.prototype = {
       cb(null);
     });
   }
-};
+}, EventEmitter.prototype);
 
 if (module.parent === null) {
   var stream = fs.createWriteStream(__dirname + '/test-repl.gif');
