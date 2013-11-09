@@ -70,6 +70,10 @@ module.exports = function writeGifToStream(stream) {
               .replace('function drawImage(cb) {', '')
               .replace(/}$/, '');
 
+    // TODO: Performance improvment: phantomjs HTTP server
+    // Dodges starting a new process each time
+    // Prevents EMFILE (file descriptor limit)
+
     // var start = Date.now();
 
     imageInfo({
