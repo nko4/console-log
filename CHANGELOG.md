@@ -1,4 +1,6 @@
 # console-log changelog
+0.0.11 - Created server to output gif from disk
+
 0.0.10 - Streaming out gif to disk
 
 0.0.9 - Moved to classical inheritance model for GifEncoder
