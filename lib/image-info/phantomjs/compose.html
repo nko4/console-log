@@ -12,29 +12,31 @@
           context = canvas.getContext('2d');
 
       // Grab the arguments
-      var encodedArg = location.search.slice(1),
+      // TODO: We REALLY should not be using cookies for this x_x
+      // TODO: Maybe we can evaluate JS pre-emptively and save to local storage or something?
+      // TODO: or suck it up and deal with async
+      var encodedArg = document.cookie.replace('PARAMS=', ''),
           arg = decodeURIComponent(encodedArg),
-      d = console.log(location),
-      c = console.log('wat');
-          // params = JSON.parse(arg);
+        c = console.log(arg),
+          params = JSON.parse(arg);
 
 
-      // // Set the canvas dimensions
-      // canvas.width = params.width;
-      // canvas.height = params.height;
+      // Set the canvas dimensions
+      canvas.width = params.width;
+      canvas.height = params.height;
 
-      // // TODO: This should be compiled by browserify or the canvas interface with a `loadImage` method
-      // var fn = new Function('cb', params.js);
+      // TODO: This should be compiled by browserify or the canvas interface with a `loadImage` method
+      var fn = new Function('cb', params.js);
 
-      // fn(function (err) {
-      //   if (err) {
-      //     throw err;
-      //   }
+      fn(function (err) {
+        if (err) {
+          throw err;
+        }
 
-      //   // Capture the data url and save it for later
-      //   var retStr = JSON.stringify([].slice.call(context.getImageData(0, 0, params.width, params.height).data));
-      //   window.retStr = retStr;
-      // });
+        // Capture the data url and save it for later
+        var retStr = JSON.stringify([].slice.call(context.getImageData(0, 0, params.width, params.height).data));
+        window.retStr = retStr;
+      });
     </script>
   </body>
 </html>
