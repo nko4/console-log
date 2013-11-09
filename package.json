@@ -4,7 +4,8 @@
   "description": "console.log",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "which phantomjs > /dev/null || npm install phantomjs"
   },
   "repository": {
     "type": "git",
