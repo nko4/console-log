@@ -71,6 +71,7 @@ async.map([
   }
 
   var parsedDataArr = unparsedDatas.map(function (dataJson) {
+    console.log(dataJson);
     var dataArr = JSON.parse(dataJson);
     var data = new Uint8ClampedArray(dataArr.length);
     data.set(dataArr);

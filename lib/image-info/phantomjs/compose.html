@@ -14,24 +14,26 @@
       // Grab the arguments
       var encodedArg = location.search.slice(1),
           arg = decodeURIComponent(encodedArg),
-          params = JSON.parse(arg);
+      c = console.log('haai');
+          // params = JSON.parse(arg);
 
-      // Set the canvas dimensions
-      canvas.width = params.width;
-      canvas.height = params.height;
 
-      // TODO: This should be compiled by browserify or the canvas interface with a `loadImage` method
-      var fn = new Function('cb', params.src);
+      // // Set the canvas dimensions
+      // canvas.width = params.width;
+      // canvas.height = params.height;
 
-      fn(function (err) {
-        if (err) {
-          throw err;
-        }
+      // // TODO: This should be compiled by browserify or the canvas interface with a `loadImage` method
+      // var fn = new Function('cb', params.js);
 
-        // Capture the data url and save it for later
-        var retStr = JSON.stringify([].slice.call(context.getImageData(0, 0, params.width, params.height).data));
-        window.retStr = retStr;
-      });
+      // fn(function (err) {
+      //   if (err) {
+      //     throw err;
+      //   }
+
+      //   // Capture the data url and save it for later
+      //   var retStr = JSON.stringify([].slice.call(context.getImageData(0, 0, params.width, params.height).data));
+      //   window.retStr = retStr;
+      // });
     </script>
   </body>
 </html>
