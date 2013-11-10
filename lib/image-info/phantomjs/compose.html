@@ -37,13 +37,12 @@
         var i = 0;
         var len = data.length;
         var retArr = new Array(len);
-        console.log('whee', len);
         for (; i < len; i++) {
           // TODO: If data size is super important, consider doubling up on digits by offsetting by 256 (this does lead into potential issues with orphan end pair)
-          retArr[i] = String.fromCharCode(data[i]);
+          // TODO: Never mind, we can't do anything with this damn offset
+          retArr[i] = String.fromCharCode(data[i] + 33);
         }
         window.retStr = retArr.join('');
-        console.log('aaa', retStr.length);
       });
     </script>
   </body>
