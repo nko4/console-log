@@ -20,8 +20,9 @@ module.exports = function writeTextToConnections (req, res) {
       res.writeHead(500, {
         'content-type': 'text/plain'
       });
-      return res.end('Content was not as expected');
+      return res.end('Content was too long');
     }
+
 
     // Break up form submission
     var queryStr = buffer.toString();
