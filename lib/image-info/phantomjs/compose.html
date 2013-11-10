@@ -15,10 +15,9 @@
       // TODO: We REALLY should not be using cookies for this x_x
       // TODO: Maybe we can evaluate JS pre-emptively and save to local storage or something?
       // TODO: or suck it up and deal with async
-      // var encodedArg = document.cookie.replace('PARAMS=', ''),
-      var encodedArg = "%7B%22width%22%3A600%2C%22height%22%3A392%2C%22js%22%3A%22%5Cn%20%20%20%20%20%20context.font%20%3D%20'30px%20Impact'%3B%5Cn%20%20%20%20%20%20context.fillStyle%20%3D%20'%23FF00FF'%3B%5Cn%20%20%20%20%20%20context.fillText('hi'%2C%2050%2C%20100)%3B%5Cn%20%20%20%20%20%20cb(null)%3B%5Cn%20%20%20%20%22%7D",
+      var encodedArg = document.cookie.replace('PARAMS=', ''),
+      // var encodedArg = "%7B%22width%22%3A600%2C%22height%22%3A392%2C%22js%22%3A%22%5Cn%20%20%20%20%20%20context.font%20%3D%20'30px%20Impact'%3B%5Cn%20%20%20%20%20%20context.fillStyle%20%3D%20'%23FF00FF'%3B%5Cn%20%20%20%20%20%20context.fillText('hi'%2C%2050%2C%20100)%3B%5Cn%20%20%20%20%20%20cb(null)%3B%5Cn%20%20%20%20%22%7D",
           arg = decodeURIComponent(encodedArg),
-          // arg = encodedArg,
           params = JSON.parse(arg);
 
       // Set the canvas dimensions
@@ -39,6 +38,7 @@
         var len = data.length;
         var retArr = new Array(len);
         for (; i < len; i++) {
+          // TODO: If data size is super important, consider doubling up on digits by offsetting by 256 (this does lead into potential issues with orphan end pair)
           retArr[i] = String.fromCharCode(data[i]);
         }
         window.retStr = retArr.join('');
