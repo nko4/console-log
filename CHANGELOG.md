@@ -1,4 +1,6 @@
 # console-log changelog
+0.12.0 - Added Google Analytics tracking to webpage
+
 0.11.0 - Moved to express and hosting webpage
 
 0.10.0 - Relocated and broke down gif-server into server folder
