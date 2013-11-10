@@ -4,45 +4,102 @@ html
     //- TODO: Google Analytics
     //- TODO: Google Analytics on messages
     title Mothereffing GIFSockets!!!
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(href="/public/css/bootstrap.min.css", rel="stylesheet", type="text/css", media="all")
     link(href="/public/css/bootstrap-responsive.min.css", rel="stylesheet", type="text/css", media="all")
     style.
-      /* TODO: Make image full width of container (whatever that is) */
       body {
         background: url(/public/img/background.png);
       }
 
+      body,
+      textarea,
+      input,
+      .btn {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      /* TODO: Make image full width of container (whatever that is) */
       .gifsocket {
         width: 600px;
         height: 392px;
         background: #F0F;
         display: block;
+        margin: 0 auto;
       }
+
+      /* TODO: This should be under a media query */
+      .header h1 {
+        font-size: 70px;
+        line-height: 120px;
+      }
+
+      .push--top {
+        margin-top: 60px;
+      }
+
   body
     .container
       .header.text-center
         h1 Mothereffing GIFSockets!!!
-        h2 in JavaScript!!!
       .well
         :markdown
-          GIFSockets are animated [GIFs][] that never end.
+          GIFSockets are animated [GIFs][] that never end. We keep an open connection and write new frames as they come in.
+
+          Try typing and submitting some text below!
 
           [GIFs]: http://en.wikipedia.org/wiki/Graphics_Interchange_Format
 
-          They operate via the GIF animation mechanism:
-
-            1. You open an image that we never close
-            2. Someone enters some text and sends it to our server
-            3. We serialize the data into the next frame
-            4. We send down the frame to all users
-
+      p.text-center
+        iframe(src="http://nodeknockout.com/iframe/console-log",
+               frameborder=0, scrolling=no,
+               allowtransparency=true, width=115, height=25)
       .row.text-center
-        //- TODO: Put up some placeholder text until first submit
-        img.gifsocket(src="/image.gif")
+        p.span12.text-center
+          //- TODO: Put up some placeholder text until first submit
+          img.gifsocket(src="/image.gif")
       div
         form(method="POST", action="/image/text")
           .row
-            textarea.span12(name="text") Hello World!
+            .span12
+              textarea.input-block-level(name="text") Hello World!
           .row
-            button.btn.span12 Submit
+            .span12
+              button.btn.btn-block Submit
+      div.push--top
+        .section
+          h2.text-center Explanation
+          .well
+            :markdown
+              If you think you have seen this before,
+              you have. [GIFSockets][] were originally
+              implemented in [Clojure][] using [Java][]
+              libraries for [GIF][] encoding.
 
+              [GIFSockets]: https://github.com/videlalvaro/gifsockets
+              [Clojure]: http://en.wikipedia.org/wiki/Clojure
+              [Java]: http://en.wikipedia.org/wiki/Java_%28programming_language%29
+              [GIF]: http://en.wikipedia.org/wiki/Graphics_Interchange_Format
+
+              Unfortunately, it was not trivial to set up.
+              Especially if you have not had experience with
+              [Clojure][] in the past.
+
+              This project is a reimplementation in [JavaScript][]
+              using a fork of [gif.js][] for encoding and
+              [PhantomJS][] for [canvas][] preparation.
+
+              [JavaScript]: http://en.wikipedia.org/wiki/ECMAScript
+              [gif.js]: http://jnordberg.github.io/gif.js/
+              [PhantomJS]: http://phantomjs.org/
+              [canvas]: https://developer.mozilla.org/en-US/docs/HTML/Canvas
+
+              To run this website locally:
+
+              ```bash
+              git clone https://github.com/nko4/console-log
+              cd console-log
+              npm start
+              # Website will be available at http://localhost:8000/
+              ```
