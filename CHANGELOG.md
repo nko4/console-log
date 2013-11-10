@@ -1,4 +1,6 @@
 # console-log changelog
+0.26.0 - Fixed up placeholder CSS
+
 0.25.0 - Added key binding for (ctrl/meta)+enter in textarea
 
 0.24.0 - Added ability to customize fonts and colors
