@@ -12,8 +12,6 @@ module.exports = function gifRepl (port) {
   var secondConnections = [];
 
   var app = http.createServer(function (req, res) {
-    console.log('Request received');
-
     if (req.method === 'POST') {
       writeTextToConnections(req, res);
     } else {
@@ -22,6 +20,7 @@ module.exports = function gifRepl (port) {
   });
 
   function openNewGif(req, res) {
+    console.log('CONNECTION-ADDED');
     res.writeHead(200, {
       'connection': 'keep-alive',
       'content-type': 'image/gif',
@@ -59,9 +58,9 @@ module.exports = function gifRepl (port) {
       // Generate a new GIF to encode
       var gif = new GifPerformance();
 
-      console.log('IMAGE-CREATE: Creating image');
+      console.log('GET-FRAME: Fetching frame data');
       gif.getTextFrameData(text, function receiveTextFrameData (err, imageData) {
-        console.log('IMAGE-CREATE: Writing image data');
+        console.log('GET-FRAME: Frame data fetched');
         function writeToFirstConnections(buff) {
           firstConnections.forEach(function writeToFirstConnection (conn) {
             conn.res.write(buff);
