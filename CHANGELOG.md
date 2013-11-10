@@ -1,4 +1,6 @@
 # console-log changelog
+0.8.0 - Moved to single frame compile for performance boost
+
 0.7.0 - Implemented GET/POST server for posting arbitrary strings
 
 0.6.0 - Created a repl interface, meeting parity of the original gifsockets
