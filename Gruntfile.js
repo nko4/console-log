@@ -4,13 +4,19 @@ module.exports = function (grunt) {
     jshint: {
       client: ['public/js/main.js']
     },
-    curl: {
-    },
     'curl-dir': {
       'tmp/': [
+        'http://getbootstrap.com/2.3.2/assets/bootstrap.zip'
       ]
     },
     unzip: {
+      bootstrap: {
+        src: 'tmp/bootstrap.zip',
+        dest: 'public/',
+        router: function (filepath) {
+          return filepath.replace('bootstrap/', '');
+        }
+      }
     },
     copy: {
     },
@@ -29,7 +35,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-zip');
 
   // Register dependency tasks
-  grunt.registerTask('install', ['curl', 'unzip', 'copy']);
+  grunt.registerTask('install', ['curl-dir', 'unzip'/*, 'copy'*/]);
 
   // Register css and js tasks
   grunt.registerTask('lint', ['jshint']);
