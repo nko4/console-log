@@ -125,5 +125,18 @@ html
           _gaq.push(['_trackEvent', 'Form submit', text]);
         };
       })();
+    script(src="/public/js/filereader.js")
+    script.
+      (function () {
+        if (document.getElementsByClassName && document.body.addEventListener) {
+          var $gifsocket = document.getElementsByClassName('gifsocket')[0];
+          FileReaderJS.setupDrop($gifsocket, {
+            loadstart: function (e, file) {
+              console.log('hi', file);
+            }
+          });
+          //- FileReaderJS.setupClipboard(document.body, opts);
+        }
+      }());
 
   //- end of body
