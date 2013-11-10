@@ -1,4 +1,6 @@
 # console-log changelog
+0.20.0 - Added media query styling and GitHub ribbon
+
 0.19.2 - Removed dev console.logs
 
 0.19.1 - Tweaking README
