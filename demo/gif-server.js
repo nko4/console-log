@@ -1,6 +1,9 @@
 var http = require('http');
 var fs = require('fs');
-var gifGenerate = require('./gif-generate');
+
+var async = require('async');
+
+var GifDuplex = require('../lib/gif-duplex');
 
 module.exports = function gifServer (port) {
 
@@ -10,7 +13,31 @@ module.exports = function gifServer (port) {
       'content-type': 'image/gif',
       'transfer-encoding': 'chunked'
     });
-    gifGenerate(res);
+    var gifDuplex = new GifDuplex();
+
+    async.eachSeries([
+      'Hello',
+      'Hello World',
+      'Hello World!',
+      'Hello World!!!'
+    ], function addTextFrame (text, cb) {
+      gifDuplex.writeTextFrame(text, cb);
+    }, function handleTextError (err) {
+      if (err) {
+        throw err;
+      }
+
+      // Complete the gif
+      gifDuplex.finish();
+    });
+
+    gifDuplex.on('data', function (buff) {
+      res.write(buff);
+    });
+
+    gifDuplex.on('end', function () {
+      res.end();
+    });
   });
 
   app.listen(port);
