@@ -23,7 +23,6 @@ module.exports = function writeTextToConnections (req, res) {
       return res.end('Content was too long');
     }
 
-
     // Break up form submission
     var queryStr = buffer.toString();
     var query = qs.parse(queryStr);

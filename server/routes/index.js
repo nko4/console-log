@@ -11,7 +11,8 @@ exports.openImage = function openImage (req, res) {
   });
 };
 
-exports.writeToImage = require('./writeToImage');
+exports.writeTextToImage = require('./writeTextToImage');
+exports.writeRawToImage = require('./writeRawToImage');
 
 // Render some jade into memory
 var fs = require('fs');
