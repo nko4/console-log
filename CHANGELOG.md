@@ -1,4 +1,6 @@
 # console-log changelog
+0.24.0 - Added ability to customize fonts and colors
+
 0.23.0 - Added client side maxlength
 
 0.22.0 - Implemented multiline text
