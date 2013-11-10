@@ -12,7 +12,8 @@ module.exports = function (grunt) {
       ],
       'tmp/': [
         'http://getbootstrap.com/2.3.2/assets/bootstrap.zip',
-        'http://subtlepatterns.com/patterns/ps_neutral.zip'
+        'http://subtlepatterns.com/patterns/ps_neutral.zip',
+        'https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png'
       ]
     },
     unzip: {
@@ -29,10 +30,8 @@ module.exports = function (grunt) {
       }
     },
     copy: {
-      background: {
-        src: 'tmp/ps_neutral/ps_neutral/ps_neutral.png',
-        dest: 'public/img/background.png'
-      }
+      'public/img/background.png': 'tmp/ps_neutral/ps_neutral/ps_neutral.png',
+      'public/img/github-ribbon.png': 'tmp/forkme_right_orange_ff7600.png'
     },
     watch: {
       js: {
