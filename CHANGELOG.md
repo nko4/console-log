@@ -1,4 +1,6 @@
 # console-log changelog
+0.17.0 - Fix for multi-line strings and quotes
+
 0.16.1 - Fix for pkill in deploy script
 
 0.16.0 - Moved to phantomjs server over phantomjs child process
