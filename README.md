@@ -5,6 +5,11 @@ Mothereffing GIFSockets!!!
 [GIFSockets][] were originally written in [Clojure][],
 using [Java][] libraries for [GIF][] encoding.
 
+[GIFSockets]: https://github.com/videlalvaro/gifsockets
+[Clojure]: http://en.wikipedia.org/wiki/Clojure
+[Java]: http://en.wikipedia.org/wiki/Java_%28programming_language%29
+[GIF]: http://en.wikipedia.org/wiki/Graphics_Interchange_Format
+
 Unfortunately, it was not trivial to set up.
 Especially if you have not had experience with
 [Clojure][] in the past.
