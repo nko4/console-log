@@ -18,10 +18,14 @@
     "async": "~0.2.7",
     "which": "~1.0.5",
     "shell-quote": "~1.4.0",
-    "raw-body": "0.0.3"
+    "raw-body": "0.0.3",
+    "express": "~3.4.4"
   },
   "engines": {
     "node": "0.10.x"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.1"
+  }
 }
