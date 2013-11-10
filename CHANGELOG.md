@@ -1,4 +1,6 @@
 # console-log changelog
+0.6.0 - Created a repl interface, meeting parity of the original gifsockets
+
 0.5.0 - Implemented GifDuplex which allows for read/write of frames
 
 0.4.0 - One more performance squeeze for reduced memory collection
