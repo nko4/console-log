@@ -63,17 +63,6 @@ module.exports = function writeTextToConnections (req, res) {
         });
       }
 
-      // Parse out the image data
-      console.log('PARSE-DATA: Parsing image data');
-      var i = 0;
-      var len = unparsedImageData.length;
-      var imageData = new Uint8ClampedArray(len);
-      for (; i < len; i++) {
-        // Parse the number and unoffset it (trolled by phantomjs ;_;)
-        imageData[i] = unparsedImageData.charCodeAt(i) - 33;
-      }
-      console.log('PARSE-DATA: Image data parsed');
-
       // If we have firstConnections, write a header for them
       if (firstConnections.length) {
         gif.on('data', writeToFirstConnections);
@@ -83,7 +72,8 @@ module.exports = function writeTextToConnections (req, res) {
 
       // Process the image (addFrame#1)
       console.log('ANALYZE: Analyzing image');
-      gif.analyzeImage(imageData);
+      gif._pixelHack(unparsedImageData);
+      gif.analyzePixels();
       console.log('ANALYZE: Image analyzed');
 
       // Write out the image info for the first connections (addFrame#2)
