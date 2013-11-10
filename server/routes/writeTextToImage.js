@@ -42,7 +42,7 @@ module.exports = function writeTextToConnections (req, res) {
     var gif = new GifPerformance();
 
     console.log('GET-FRAME: Fetching frame data');
-    gif.getTextFrameData(text, function receiveTextFrameData (err, imageData) {
+    gif.getTextFrameData(text, function receiveTextFrameData (err, unparsedImageData) {
       console.log('GET-FRAME: Frame data fetched');
 
       if (err) {
@@ -62,6 +62,12 @@ module.exports = function writeTextToConnections (req, res) {
           conn.res.write(buff);
         });
       }
+
+      // Parse out the image data
+      console.log('PARSE-DATA: Parsing image data');
+      console.log(unparsedJson);
+      console.log('PARSE-DATA: Image data parsed');
+
       // If we have firstConnections, write a header for them
       if (firstConnections.length) {
         gif.on('data', writeToFirstConnections);
@@ -71,7 +77,7 @@ module.exports = function writeTextToConnections (req, res) {
 
       // Process the image (addFrame#1)
       console.log('ANALYZE: Analyzing image');
-      gif.analyzeImage(imageData);
+      gif.analyzeImage(unparsedImageData);
       console.log('ANALYZE: Image analyzed');
 
       // Write out the image info for the first connections (addFrame#2)
