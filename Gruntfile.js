@@ -5,6 +5,10 @@ module.exports = function (grunt) {
       client: ['public/js/main.js']
     },
     'curl-dir': {
+      'public/js/': [
+        'https://raw.github.com/bgrins/filereader.js/60699e42b380c049fb32c1c259b69c4b792ba79e/filereader.js',
+        'https://raw.github.com/bgrins/filereader.js/60699e42b380c049fb32c1c259b69c4b792ba79e/filereader.min.js'
+      ],
       'tmp/': [
         'http://getbootstrap.com/2.3.2/assets/bootstrap.zip',
         'http://subtlepatterns.com/patterns/ps_neutral.zip'

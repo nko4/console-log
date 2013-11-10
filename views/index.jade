@@ -58,7 +58,7 @@ html
           //- TODO: Put up some placeholder text until first submit
           img.gifsocket(src="/image.gif")
       div
-        iframe.hidden(name="request-frame")
+        iframe.hidden(name="request-frame", width=0, height=0)
         form#gifsocket-form(method="POST", action="/image/text", target="request-frame")
           .row
             .span12
