@@ -1,4 +1,6 @@
 # console-log changelog
+0.25.0 - Added key binding for (ctrl/meta)+enter in textarea
+
 0.24.0 - Added ability to customize fonts and colors
 
 0.23.0 - Added client side maxlength
