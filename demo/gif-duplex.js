@@ -1,3 +1,9 @@
+var fs = require('fs');
+
+var async = require('async');
+
+var GifDuplex = require('../lib/gif-duplex');
+
 if (module.parent === null) {
   var stream = fs.createWriteStream(__dirname + '/test-duplex.gif');
   var gifDuplex = new GifDuplex();
