@@ -12,7 +12,7 @@ module.exports = function writeTextToConnections (req, res) {
   console.log('RAW-BODY-PARSE: Parsing body');
   getRawBody(req, {
     expected: req.headers['content-length'],
-    limit: 1 * 1024 * 1024 // 1 mb
+    limit: 10 * 1024 * 1024 // 1 mb
   }, function (err, buffer) {
     console.log('RAW-BODY-PARSE: Body parsed');
     // If there was an error (e.g. bad length, over length), respond poorly
@@ -26,13 +26,6 @@ module.exports = function writeTextToConnections (req, res) {
     // Break up form submission
     var dataStr = buffer.toString();
     var imageData = JSON.parse(dataStr);
-
-    if (text === undefined) {
-      res.writeHead(500, {
-        'content-type': 'text/plain'
-      });
-      return res.end('Missing "text" parameter');
-    }
 
     // Write out our text to all connections
     console.log('RAW-Outputting: ');
@@ -91,9 +84,9 @@ module.exports = function writeTextToConnections (req, res) {
       // Move all firstConnections to secondConnections
       secondConnections.push.apply(secondConnections, firstConnections);
       firstConnections.splice(0, firstConnections.length);
-    });
 
     // Send a no content response
     res.writeHead(204);
     res.end();
+  });
 };

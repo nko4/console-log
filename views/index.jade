@@ -135,14 +135,17 @@ html
     script(src="/public/js/jquery.js")
     script.
       (function () {
+        // TODO: Adjust these with block
+        var gifsocketWidth = 600;
+        var gifsocketHeight = 392;
+
         var $canvas = document.createElement('canvas');
+        $canvas.width = gifsocketWidth;
+        $canvas.height = gifsocketHeight;
         if ($canvas.getContext) {
           // TODO: Write out to the style -> background url
         }
 
-        // TODO: Adjust these with block
-        var gifsocketWidth = 600;
-        var gifsocketHeight = 392;
 
         if (document.getElementsByClassName && document.body.addEventListener) {
           var $gifsocket = document.getElementsByClassName('gifsocket')[0];
