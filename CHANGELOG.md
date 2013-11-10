@@ -1,4 +1,6 @@
 # console-log changelog
+0.27.0 - Updated input sizing at lower widths
+
 0.26.0 - Fixed up placeholder CSS
 
 0.25.0 - Added key binding for (ctrl/meta)+enter in textarea
