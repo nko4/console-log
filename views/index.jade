@@ -180,11 +180,17 @@ html
           });
           //- TODO: Continue with setup of this
           //- FileReaderJS.setupClipboard(document.body, opts);
-
           if (window.location.href.indexOf('localhost') !== -1) {
             $.post('/image/text', 'text=hi');
           }
         }
+
+        //- TODO: We can notify user to reload page on timeout
+        //- TODO: or automatically reload
+        //- TODO: We can add this directly to the gif to ensure everything is good
+        //- document.body.onload = function () {
+        //-   console.log('load complete');
+        //- };
       }());
 
   //- end of body
