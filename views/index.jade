@@ -62,7 +62,7 @@ html
         form#gifsocket-form(method="POST", action="/image/text", target="request-frame")
           .row
             .span12
-              textarea.input-block-level(name="text") Hello World!
+              textarea.input-block-level(id="gifsocket-text", name="text") Hello World!
           .row
             .span12
               button.btn.btn-block Submit
@@ -117,6 +117,13 @@ html
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+        var $gifsocketForm = document.getElementById('gifsocket-form');
+        var $gifsocketText = document.getElementById('gifsocket-text');
+        $gifsocketForm.onsubmit = function () {
+          var text = $gifsocketText.value;
+          _gaq.push(['_trackEvent', 'Form submit', text]);
+        };
       })();
 
   //- end of body
