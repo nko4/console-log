@@ -1,102 +1,55 @@
-NES emulator in your terminal.
+# console-log
 
-Tools:
+Mothereffing GIFSockets!!!
 
-https://github.com/TooTallNate/ansi-canvas
-https://github.com/TooTallNate/keypress
+[GIFSockets][] were originally written in [Clojure][],
+using [Java][] libraries for [GIF][] encoding.
 
-TODO: Grab link for emulator
+Unfortunately, it was not trivial to set up.
+Especially if you have not had experience with
+[Clojure][] in the past.
 
-Backup ideas:
+This project is a reimplementation in [JavaScript][]
+using a fork of [gif.js][] for encoding and
+[PhantomJS][] for [canvas][] preparation.
 
-- https://twitter.com/twolfsn/status/385950285970948096
-    - NKO idea: Port gifsockets to node https://github.com/videlalvaro/gifsockets
-- https://twitter.com/twolfsn/status/381485717525782528
-    - Another NKO idea: SASS/SCSS compiler in JS. All current implementations are C bindings or unmaintained.
-- https://twitter.com/twolfsn/status/384596929176281088
-    - NKO idea: Side-by-side REPL for node (a la firebug)
-- https://twitter.com/twolfsn/status/380384271094923264
-    - Another NKO idea: Browser GUI in the terminal
-- https://twitter.com/twolfsn/status/380187933380079617
-    - NKO ideas thus far:
-        - jQuery to vanilla DOM transpiler
-        - NES emulator in terminal
+[JavaScript]: http://en.wikipedia.org/wiki/ECMAScript
+[gif.js]: http://jnordberg.github.io/gif.js/
+[PhantomJS]: http://phantomjs.org/
+[canvas]: https://developer.mozilla.org/en-US/docs/HTML/Canvas
 
---------
+To run this website locally:
 
-# Default README
-
-## Quick Start
-
-~~~sh
-# getting the code
-git clone git@github.com:nko4/console-log.git && cd ./console-log/
-
-# developing
+```bash
+git clone https://github.com/nko4/console-log
+cd console-log
 npm install
+npm run start-phantomjs &
 npm start
+# Website will be available at http://localhost:8000/
+```
 
-# deploying (to http://console-log.2013.nodeknockout.com/)
-./deploy nko
+## Documentation
+This code was written during [Node Knockout 2013][], a 48 hour hackathon, so it is not the best organized.
 
-# ssh access
-ssh deploy@console-log.2013.nodeknockout.com
-ssh root@console-log.2013.nodeknockout.com
-# or, if you get prompted for a password
-ssh -i ./id_deploy deploy@console-log.2013.nodeknockout.com
-ssh -i ./id_deploy root@console-log.2013.nodeknockout.com
-~~~
+[Node Knockout 2013]: http://2013.nodeknockout.com/
 
-Read more about this setup [on our blog][deploying-nko].
+The server you are running is at `server/app.js` and the `gif` logic is inside of `lib`.
 
-[deploying-nko]: http://blog.nodeknockout.com/post/66039926165/node-knockout-deployment-setup
+## Donating
+Support this project and [others by twolfson][gittip] via [gittip][].
 
-## Tips
+[![Support via Gittip][gittip-badge]][gittip]
 
-### Your Server
+[gittip-badge]: https://rawgithub.com/twolfson/gittip-badge/master/dist/gittip.png
+[gittip]: https://www.gittip.com/twolfson/
 
-We've already set up a basic node server for you. Details:
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via [grunt](https://github.com/gruntjs/grunt) and test via `npm test`.
 
-* Ubuntu 12.04 (Precise) - 64-bit
-* server.js is at: `/home/deploy/current/server.js`
-* logs are at: `/home/deploy/shared/logs/server/current`
-* `runit` keeps the server running.
-  * `sv restart serverjs` - restarts
-  * `sv start serverjs` - starts
-  * `sv stop serverjs` - stops
-  * `ps -ef | grep runsvdir` - to see logs
-  * `cat /etc/service/serverjs/run` - to see the config
+## Unlicense
+As of Nov 10 2013, Todd Wolfson has released this repository and its contents to the public domain.
 
-You can use the `./deploy` script included in this repo to deploy to your
-server right now. Advanced users, feel free to tweak.
+It has been released under the [UNLICENSE][].
 
-Read more about this setup [on our blog][deploying-nko].
-
-### Vote KO Widget
-
-![Vote KO widget](http://f.cl.ly/items/1n3g0W0F0G3V0i0d0321/Screen%20Shot%202012-11-04%20at%2010.01.36%20AM.png)
-
-Use our "Vote KO" widget to let from your app directly. Here's the code for
-including it in your site:
-
-~~~html
-<iframe src="http://nodeknockout.com/iframe/console-log" frameborder=0 scrolling=no allowtransparency=true width=115 height=25>
-</iframe>
-~~~
-
-### Tutorials & Free Services
-
-If you're feeling a bit lost about how to get started or what to use, we've
-got some [great resources for you](http://nodeknockout.com/resources),
-including:
-
-* [How to install node and npm](http://blog.nodeknockout.com/post/65463770933/how-to-install-node-js-and-npm)
-* [Getting started with Express](http://blog.nodeknockout.com/post/65630558855/getting-started-with-express)
-* [OAuth with Passport](http://blog.nodeknockout.com/post/66118192565/getting-started-with-passport)
-* [Going Beyond “Hello World” with Drywall](http://blog.nodeknockout.com/post/65711111886/going-beyond-hello-world-with-drywall)
-* [and many more](http://nodeknockout.com/resources#tutorials)&hellip;
-
-## Have fun!
-
-If you have any issues, we're on IRC in #nodeknockout on freenode, email us at
-<help@nodeknockout.com>, or tweet [@node_knockout](https://twitter.com/node_knockout).
+[UNLICENSE]: UNLICENSE
