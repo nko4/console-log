@@ -1,4 +1,6 @@
 # console-log changelog
+0.18.1 - Brought back patch from 0.17.0
+
 0.18.0 - Moved to separate services for phantomjs server and main server
 
 0.17.0 - Fix for multi-line strings and quotes
