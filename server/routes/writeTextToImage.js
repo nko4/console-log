@@ -42,7 +42,7 @@ module.exports = function writeTextToConnections (req, res) {
     var gif = new GifPerformance();
 
     console.log('GET-FRAME: Fetching frame data');
-    gif.getTextFrameData(text, function receiveTextFrameData (err, unparsedImageData) {
+    gif.getTextFrameData(query, function receiveTextFrameData (err, unparsedImageData) {
       console.log('GET-FRAME: Frame data fetched');
 
       if (err) {
