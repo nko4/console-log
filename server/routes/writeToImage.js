@@ -1,3 +1,5 @@
+var qs = require('querystring');
+
 var getRawBody = require('raw-body');
 
 var GifPerformance = require('../../lib/gif-performance');
@@ -21,10 +23,20 @@ module.exports = function writeTextToConnections (req, res) {
       res.end('Content was not as expected');
     }
 
-    // Write out our text to all connections
-    var text = buffer.toString();
-    console.log('Outputting: ' + text);
+    // Break up form submission
+    var queryStr = buffer.toString();
+    var query = qs.parse(queryStr);
+    var text = query.text;
 
+    if (text === undefined) {
+      res.writeHead(500, {
+        'content-type': 'text/plain'
+      });
+      res.end('Missing "text" parameter');
+    }
+
+    // Write out our text to all connections
+    console.log('Outputting: ' + text);
 
     // Generate a new GIF to encode
     var gif = new GifPerformance();

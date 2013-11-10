@@ -16,16 +16,19 @@ module.exports = function gifServer (port) {
   // Host static files
   app.use('/public', express['static'](__dirname + '/../public'));
 
+  // Set up connections for server logic
+  app.use(function saveConnections (req, res, next) {
+    req.firstConnections = firstConnections;
+    req.secondConnections = secondConnections;
+    next();
+  });
+
   // Host homepage
   app.get('/', routes.index);
 
   // Server logic
-  app.use(function saveConnections (req, res, next) {
-    req.firstConnections = firstConnections;
-    req.secondConnections = secondConnections;
-  });
   app.get('/image.gif', routes.openImage);
-  app.post('/image', routes.writeToImage);
+  app.post('/image/text', routes.writeToImage);
 
   // Host 404 page
   app.all('*', routes[404]);
