@@ -3,12 +3,13 @@ var http = require('http');
 
 var getRawBody = require('raw-body');
 
-var GifDuplex = require('../lib/gif-duplex');
+var GifPerformance = require('../lib/gif.js/GifPerformance');
 
 module.exports = function gifRepl (port) {
 
   // Keep track of array of connections
-  var connections = [];
+  var firstConections = [];
+  var secondConnections = [];
 
   var app = http.createServer(function (req, res) {
     console.log('Request received');
@@ -26,17 +27,10 @@ module.exports = function gifRepl (port) {
       'content-type': 'image/gif',
       'transfer-encoding': 'chunked'
     });
-    var gifDuplex = new GifDuplex();
 
-    gifDuplex.on('data', function (buff) {
-      res.write(buff);
+    firstConections.push({
+      res: res
     });
-
-    gifDuplex.on('end', function () {
-      res.end();
-    });
-
-    connections.push(gifDuplex);
   }
 
   // TODO: Debug single quotes in URLs
@@ -60,16 +54,35 @@ module.exports = function gifRepl (port) {
       // Write out our text to all connections
       var text = buffer.toString();
       console.log('Outputting: ' + text);
-      if (connections.length) {
-        connections[0].getTextFrameData(text, function (err, dataArr) {
-          connections.forEach(function writeToResponse (gifDuplex) {
-            gifDuplex.writeFrameData(dataArr);
-          });
 
-          res.writeHead(204);
-          res.end();
-        });
-      }
+
+      // Generate a new GIF to encode
+      var gif = new GifPerformance();
+
+
+      gif.callMethod('getTextFrameData', function (err, dataArr) {
+        console.log('hi');
+
+        function writeToFirstConnections(buff) {
+          firstConnections.forEach(function writeToFirstConnection (conn) {
+            conn.res.write(buff);
+          });
+        }
+        function writeToSecondConnections(buff) {
+          secondConnections.forEach(function writeToSecondConnection (conn) {
+            conn.res.write(buff);
+          });
+        }
+        // If we have firstConnections, write a header for them
+        if (firstConnections.length) {
+          gif.on('data', writeToFirstConnections);
+          gif.writeHeader();
+          // gif.
+        }
+      });
+      // Send a no content response
+      res.writeHead(204);
+      res.end();
     });
   }
 
