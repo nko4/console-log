@@ -234,12 +234,24 @@ html
         var $canvas = document.createElement('canvas');
         $canvas.width = gifsocketWidth;
         $canvas.height = gifsocketHeight;
-        if ($canvas.getContext) {
-          // TODO: Write out to the style -> background url
+
+        var $gifsocket;
+        if (document.getElementsByClassName) {
+          $gifsocket = document.getElementsByClassName('gifsocket')[0];
         }
 
-        if (document.getElementsByClassName && document.body.addEventListener) {
-          var $gifsocket = document.getElementsByClassName('gifsocket')[0];
+        if ($gifsocket && $canvas.getContext) {
+          // TODO: Write out to the style -> background url
+          var context = $canvas.getContext('2d');
+          context.font = '30px Impact';
+          context.fillStyle = '#000000';
+          context.fillRect(0, 0, gifsocketWidth, gifsocketHeight);
+          context.fillStyle = '#BADA55';
+          context.fillText('Waiting for input...', 15, 30 + 15);
+          $gifsocket.style.cssText = 'background: url("' + $canvas.toDataURL() + '");';
+        }
+
+        if ($gifsocket && document.body.addEventListener) {
           FileReaderJS.setupDrop($gifsocket, {
             dragClass: 'drag-entered',
             on: {
