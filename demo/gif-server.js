@@ -93,6 +93,7 @@ module.exports = function gifRepl (port) {
         // Write out the image itself for all connections (addFrame#3)
         gif.on('data', writeToFirstConnections);
         gif.outputImage();
+        gif.flushData();
 
         // Clean up event listeners
         gif.removeAllListeners();
