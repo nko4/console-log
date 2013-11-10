@@ -1,8 +1,6 @@
 !!!
 html
   head
-    //- TODO: Google Analytics
-    //- TODO: Google Analytics on messages
     title Mothereffing GIFSockets!!!
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(href="/public/css/bootstrap.min.css", rel="stylesheet", type="text/css", media="all")
@@ -61,7 +59,7 @@ html
           img.gifsocket(src="/image.gif")
       div
         iframe.hidden(name="request-frame")
-        form(method="POST", action="/image/text", target="request-frame")
+        form#gifsocket-form(method="POST", action="/image/text", target="request-frame")
           .row
             .span12
               textarea.input-block-level(name="text") Hello World!
@@ -101,6 +99,24 @@ html
               ```bash
               git clone https://github.com/nko4/console-log
               cd console-log
+              npm install
               npm start
               # Website will be available at http://localhost:8000/
               ```
+
+    script.
+      //- TODO: Google Analytics on messages
+      var _gaq = _gaq || [];
+      _gaq.push([
+        '_setAccount',
+        window.location.href.indexOf('localhost') === -1 ? 'UA-45607410-1' : 'UA-45607410-2'
+      ]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+  //- end of body
