@@ -60,11 +60,16 @@ module.exports = function gifRepl (port) {
       // Write out our text to all connections
       var text = buffer.toString();
       console.log('Outputting: ' + text);
-      connections.forEach(function writeToResponse (gifDuplex) {
-        gifDuplex.writeTextFrame(text);
-      });
-      res.writeHead(204);
-      res.end();
+      if (connections.length) {
+        connections[0].getTextFrameData(text, function (err, dataArr) {
+          connections.forEach(function writeToResponse (gifDuplex) {
+            gifDuplex.writeImageData(dataArr);
+          });
+
+          res.writeHead(204);
+          res.end();
+        });
+      }
     });
   }
 
