@@ -154,9 +154,7 @@ html
                 img.src = target.result;
                 img.onload = function () {
                   var context = $canvas.getContext('2d');
-                  // TODO: Figure out how to clear it to transparent
-                  context.fillStyle = '#000';
-                  context.fillRect(0, 0, gifsocketWidth, gifsocketHeight);
+                  context.clearRect(0, 0, gifsocketWidth, gifsocketHeight);
                   context.drawImage(img, 0, 0);
                   console.log(context.getImageData(0, 0, gifsocketWidth, gifsocketHeight).data);
                 };
