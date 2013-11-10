@@ -1,4 +1,6 @@
 # console-log changelog
+0.18.2 - Removed unnecessary pkill from deploy script
+
 0.18.1 - Brought back patch from 0.17.0
 
 0.18.0 - Moved to separate services for phantomjs server and main server
