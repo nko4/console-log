@@ -1,6 +1,4 @@
-# console-log
-
-Mothereffing GIFSockets!!!
+# Mothereffing GIFSockets!!!
 
 [GIFSockets][] were originally written in [Clojure][],
 using [Java][] libraries for [GIF][] encoding.
