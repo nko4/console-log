@@ -1,4 +1,6 @@
 # console-log changelog
+0.9.1 - Added more timings but did not find any low hanging fruit
+
 0.9.0 - Broke down GIFEncoder and making efficient buffering happen
 
 0.8.0 - Moved to single frame compile for performance boost
