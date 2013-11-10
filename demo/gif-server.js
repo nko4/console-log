@@ -3,12 +3,12 @@ var http = require('http');
 
 var getRawBody = require('raw-body');
 
-var GifPerformance = require('../lib/gif.js/GifPerformance');
+var GifPerformance = require('../lib/gif-performance');
 
 module.exports = function gifRepl (port) {
 
   // Keep track of array of connections
-  var firstConections = [];
+  var firstConnections = [];
   var secondConnections = [];
 
   var app = http.createServer(function (req, res) {
@@ -28,7 +28,7 @@ module.exports = function gifRepl (port) {
       'transfer-encoding': 'chunked'
     });
 
-    firstConections.push({
+    firstConnections.push({
       res: res
     });
   }
@@ -59,10 +59,7 @@ module.exports = function gifRepl (port) {
       // Generate a new GIF to encode
       var gif = new GifPerformance();
 
-
-      gif.callMethod('getTextFrameData', function (err, dataArr) {
-        console.log('hi');
-
+      gif.getTextFrameData(text, function receiveTextFrameData (err, imageData) {
         function writeToFirstConnections(buff) {
           firstConnections.forEach(function writeToFirstConnection (conn) {
             conn.res.write(buff);
@@ -77,8 +74,34 @@ module.exports = function gifRepl (port) {
         if (firstConnections.length) {
           gif.on('data', writeToFirstConnections);
           gif.writeHeader();
-          // gif.
+          gif.flushData();
         }
+
+        // Process the image (addFrame#1)
+        gif.analyzeImage(imageData);
+
+        // Write out the image info for the first connections (addFrame#2)
+        gif.writeImageInfo();
+        gif.flushData();
+
+        // Write out the image info for the second connections (addFrame#2)
+        gif.removeListener('data', writeToFirstConnections);
+        gif.on('data', writeToSecondConnections);
+        gif.writeImageInfo();
+        gif.flushData();
+
+        // Write out the image itself for all connections (addFrame#3)
+        gif.on('data', writeToFirstConnections);
+        gif.outputImage();
+
+        // Clean up event listeners
+        gif.removeAllEventListeners();
+
+        // TODO: On process close, write out finish to all connections
+
+        // Move all firstConnections to secondConnections
+        secondConnections.push.apply(secondConnections, firstConnections);
+        firstConnections = [];
       });
       // Send a no content response
       res.writeHead(204);
