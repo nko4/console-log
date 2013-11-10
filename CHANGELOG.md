@@ -1,4 +1,6 @@
 # console-log changelog
+0.19.1 - Tweaking README
+
 0.19.0 - Open sourced repository and purged deploy keys
 
 0.18.2 - Removed unnecessary pkill from deploy script
