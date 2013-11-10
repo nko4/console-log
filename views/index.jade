@@ -24,15 +24,6 @@ html
         font-weight: bold;
       }
 
-      .gifsocket {
-        /* #GIFSOCKET-DIMENSIONS */
-        width: 600px;
-        height: auto;
-        background: #666;
-        display: block;
-        margin: 0 auto;
-      }
-
       /* http://twbs.github.io/bootstrap/2.3.2/scaffolding.html#responsive */
       /* Breakpoints should be: */
       /* 480px (no columns/gutter) */
@@ -49,6 +40,31 @@ html
           font-size: 52px;
           line-height: 75px;
         }
+      }
+
+      /* TODO: Come back to drag and drop */
+      /* TODO: Come back to low width input width */
+
+      .gifsocket-container {
+        /* #GIFSOCKET-DIMENSIONS */
+        width: 600px;
+        height: 380px;
+        background: #666;
+        display: block;
+        margin: 0 auto;
+      }
+
+      @media(max-width: 980px) {
+        .gifsocket-container {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      /* #GIFSOCKET-DIMENSIONS */
+      .gifsocket {
+        width: 100%;
+        height: auto;
       }
 
       @media (max-width: 767px) {
@@ -112,7 +128,8 @@ html
       .row.text-center
         p.span12.text-center
           //- TODO: Put up some <canvas> based placeholder text until first submit
-          img.gifsocket(src="/image.gif")
+          .gifsocket-container
+            img.gifsocket(src="/image.gif")
       div
         iframe.hidden(name="request-frame", width=0, height=0)
         form#gifsocket-form(method="POST", action="/image/text", target="request-frame")
@@ -225,7 +242,7 @@ html
         }
 
         if (document.getElementsByClassName && document.body.addEventListener) {
-          var $gifsocket = document.getElementsByClassName('gifsocket')[0];
+          var $gifsocket = document.getElementsByClassName('gifsocket-container')[0];
           FileReaderJS.setupDrop($gifsocket, {
             dragClass: 'drag-entered',
             on: {
@@ -257,9 +274,10 @@ html
           });
           //- TODO: Continue with setup of this
           //- FileReaderJS.setupClipboard(document.body, opts);
-          if (window.location.href.indexOf('localhost') !== -1) {
-            $.post('/image/text', 'text=hello\nworld&foreground=' + encodeURIComponent('#BADA55'));
-          }
+
+          //- if (window.location.href.indexOf('localhost') !== -1) {
+          //-   $.post('/image/text', 'text=hello\nworld&foreground=' + encodeURIComponent('#BADA55'));
+          //- }
         }
 
         //- TODO: We can notify user to reload page on timeout
