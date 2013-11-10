@@ -95,7 +95,7 @@ module.exports = function gifRepl (port) {
         gif.outputImage();
 
         // Clean up event listeners
-        gif.removeAllEventListeners();
+        gif.removeAllListeners();
 
         // TODO: On process close, write out finish to all connections
 
