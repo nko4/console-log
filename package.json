@@ -1,6 +1,6 @@
 {
   "name": "nko4-console-log",
-  "version": "0.18.1",
+  "version": "0.18.2",
   "description": "console.log",
   "main": "server.js",
   "scripts": {
