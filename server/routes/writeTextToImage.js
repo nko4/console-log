@@ -53,6 +53,10 @@ module.exports = function writeTextToConnections (req, res) {
         return res.end('Error generating frame');
       }
 
+      // Send a no content response
+      res.writeHead(204);
+      res.end();
+
       function writeToFirstConnections(buff) {
         firstConnections.forEach(function writeToFirstConnection (conn) {
           conn.res.write(buff);
@@ -107,8 +111,5 @@ module.exports = function writeTextToConnections (req, res) {
       secondConnections.push.apply(secondConnections, firstConnections);
       firstConnections.splice(0, firstConnections.length);
     });
-    // Send a no content response
-    res.writeHead(204);
-    res.end();
   });
 };
