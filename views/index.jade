@@ -130,7 +130,26 @@ html
       (function () {
         if (document.getElementsByClassName && document.body.addEventListener) {
           var $gifsocket = document.getElementsByClassName('gifsocket')[0];
-          console.log($gifsocket);
+
+          var $modal = document.createElement('div');
+          $modal.className = 'modal';
+          $modal.innerHTML = [
+            '<div class="modal-header">',
+            '  <button type="button" class="close modal-close" aria-hidden="true">&times;</button>',
+            '  <h3 id="modal-h3">Header</h3>',
+            '</div>',
+            '<div class="modal-body">',
+            '  <p id="modal-content">Content</p>',
+            '</div>',
+            '<div class="modal-footer">',
+            '  <a href="#" class="btn btn-primary modal-close">Okay</a>',
+            '</div>'
+          ].join('');
+          var $modalBackdrop = document.createElement('div');
+          $modalBackdrop.className = 'modal-backdrop fade in';
+          document.body.appendChild($modal);
+          document.body.appendChild($modalBackdrop);
+
           FileReaderJS.setupDrop($gifsocket, {
             on: {
               loadstart: function (e, file) {
