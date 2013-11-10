@@ -1,4 +1,6 @@
 # console-log changelog
+0.13.0 - Added drag and drop support
+
 0.12.0 - Added Google Analytics tracking to webpage
 
 0.11.0 - Moved to express and hosting webpage
