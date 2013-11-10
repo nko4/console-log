@@ -42,9 +42,6 @@ html
         }
       }
 
-      /* TODO: Come back to drag and drop */
-      /* TODO: Come back to low width input width */
-
       /* #GIFSOCKET-DIMENSIONS */
       /* min-width = 600px with 20px gutter */
       @media(min-width: 640px) {
@@ -99,6 +96,21 @@ html
         margin-right: auto;
       }
 
+      /* TODO: Re-enable gifsocket */
+
+      @media (max-width: 768px) {
+        /* .span2 */
+        .form-horizontal-phone label {
+          min-width: 23.076923076923077%;
+          *min-width: 23.023731587561375%;
+        }
+
+        /* .span10 */
+        .form-horizontal-phone input {
+          width: 100%;
+        }
+      }
+
   body
     .container
       .header.text-center
@@ -119,7 +131,8 @@ html
       .row.text-center
         p.span12.text-center
           //- TODO: Put up some <canvas> based placeholder text until first submit
-          img.gifsocket(src="/image.gif")
+          //- img.gifsocket(src="/image.gif")
+          .gifsocket(src="/image.gif")
       div
         iframe.hidden(name="request-frame", width=0, height=0)
         form#gifsocket-form(method="POST", action="/image/text", target="request-frame")
@@ -127,19 +140,25 @@ html
             .span12
               // There is a server imposed max length of 4096 (implementation limitation), this is just to be nice.
               textarea#gifsocket-text.input-block-level(name="text", maxlength=4096) Hello World!
-          .row.form-inline
-            p.span3
-              label(for="foreground") Foreground:&nbsp;
-              input.input-small(name="foreground", value="#BADA55", type="text")
-            p.span3
-              label(for="background") Background:&nbsp;
-              input.input-small(name="background", value="#000000", type="text")
-            p.span3
-              label(for="font-size") Font size:&nbsp;
-              input.input-small(name="font-size", value="30", type="text")
-            p.span3
-              label(for="font-family") Font family:&nbsp;
-              input.input-small(name="font-family", value="Impact", type="text")
+          .form-inline.form-horizontal-phone
+            .row
+              .span12
+                p.row
+                  .span3
+                    label(for="foreground") Foreground:&nbsp;
+                    input.input-small(name="foreground", value="#BADA55", type="text")
+                p.row
+                  .span3
+                    label(for="background") Background:&nbsp;
+                    input.input-small(name="background", value="#000000", type="text")
+                p.row
+                  .span3
+                    label(for="font-size") Font size:&nbsp;
+                    input.input-small(name="font-size", value="30", type="text")
+                p.row
+                  .span3
+                    label(for="font-family") Font family:&nbsp;
+                    input.input-small(name="font-family", value="Impact", type="text")
 
           .row
             .span12
