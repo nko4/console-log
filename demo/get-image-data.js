@@ -1,3 +1,4 @@
+// DEV: This will be re-used on the client side when we have drag and drop
 var options = {width: 200, height: 200};
 
 var ctx;
