@@ -21,6 +21,7 @@ module.exports = function gifRepl (port) {
     var gifDuplex = new GifDuplex();
 
     gifDuplex.on('data', function (buff) {
+      console.log('Writing buffer');
       res.write(buff);
     });
 

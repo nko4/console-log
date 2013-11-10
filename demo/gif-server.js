@@ -11,6 +11,8 @@ module.exports = function gifRepl (port) {
   var connections = [];
 
   var app = http.createServer(function (req, res) {
+    console.log('Request received');
+
     if (req.method === 'POST') {
       writeTextToConnections(req, res);
     } else {
@@ -41,10 +43,12 @@ module.exports = function gifRepl (port) {
 
   function writeTextToConnections(req, res) {
     // Parse in the body (up to 1mb)
+    console.log('Parsing body');
     getRawBody(req, {
       expected: req.headers['content-length'],
       limit: 1 * 1024 * 1024 // 1 mb
     }, function (err, buffer) {
+      console.log('Body parsed');
       // If there was an error (e.g. bad length, over length), respond poorly
       if (err) {
         res.writeHead(500, {
