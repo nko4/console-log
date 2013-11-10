@@ -7,7 +7,8 @@ module.exports = function (grunt) {
     'curl-dir': {
       'public/js/': [
         'https://raw.github.com/bgrins/filereader.js/60699e42b380c049fb32c1c259b69c4b792ba79e/filereader.js',
-        'https://raw.github.com/bgrins/filereader.js/60699e42b380c049fb32c1c259b69c4b792ba79e/filereader.min.js'
+        'https://raw.github.com/bgrins/filereader.js/60699e42b380c049fb32c1c259b69c4b792ba79e/filereader.min.js',
+        'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js'
       ],
       'tmp/': [
         'http://getbootstrap.com/2.3.2/assets/bootstrap.zip',

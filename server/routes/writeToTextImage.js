@@ -20,7 +20,7 @@ module.exports = function writeTextToConnections (req, res) {
       res.writeHead(500, {
         'content-type': 'text/plain'
       });
-      res.end('Content was not as expected');
+      return res.end('Content was not as expected');
     }
 
     // Break up form submission
@@ -32,7 +32,7 @@ module.exports = function writeTextToConnections (req, res) {
       res.writeHead(500, {
         'content-type': 'text/plain'
       });
-      res.end('Missing "text" parameter');
+      return res.end('Missing "text" parameter');
     }
 
     // Write out our text to all connections
@@ -44,6 +44,14 @@ module.exports = function writeTextToConnections (req, res) {
     console.log('GET-FRAME: Fetching frame data');
     gif.getTextFrameData(text, function receiveTextFrameData (err, imageData) {
       console.log('GET-FRAME: Frame data fetched');
+
+      if (err) {
+        res.writeHead(500, {
+          'content-type': 'text/plain'
+        });
+        return res.end('Error generating frame');
+      }
+
       function writeToFirstConnections(buff) {
         firstConnections.forEach(function writeToFirstConnection (conn) {
           conn.res.write(buff);

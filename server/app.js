@@ -28,7 +28,8 @@ module.exports = function gifServer (port) {
 
   // Server logic
   app.get('/image.gif', routes.openImage);
-  app.post('/image/text', routes.writeToImage);
+  app.post('/image/text', routes.writeTextToImage);
+  app.post('/image/raw', routes.writeRawToImage);
 
   // Host 404 page
   app.all('*', routes[404]);
