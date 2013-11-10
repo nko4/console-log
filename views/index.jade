@@ -100,7 +100,7 @@ html
         form#gifsocket-form(method="POST", action="/image/text", target="request-frame")
           .row
             .span12
-              textarea.input-block-level(id="gifsocket-text", name="text") Hello World!
+              textarea#gifsocket-text.input-block-level(name="text",maxlength=4096) Hello World!
           .row
             .span12
               button.btn.btn-block Submit
