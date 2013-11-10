@@ -100,7 +100,8 @@ html
         form#gifsocket-form(method="POST", action="/image/text", target="request-frame")
           .row
             .span12
-              textarea#gifsocket-text.input-block-level(name="text",maxlength=4096) Hello World!
+              // There is a server imposed max length of 4096 (implementation limitation), this is just to be nice.
+              textarea#gifsocket-text.input-block-level(name="text", maxlength=4096) Hello World!
           .row
             .span12
               button.btn.btn-block Submit
