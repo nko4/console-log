@@ -19,6 +19,19 @@ html
       .header.text-center
         h1 Mothereffing GIFSockets!!!
         h2 in JavaScript!!!
+      .well
+        :markdown
+          GIFSockets are animated [GIFs][] that never end.
+
+          [GIFs]: http://en.wikipedia.org/wiki/Graphics_Interchange_Format
+
+          They operate via the GIF animation mechanism:
+
+            1. You open an image that we never close
+            2. Someone enters some text and sends it to our server
+            3. We serialize the data into the next frame
+            4. We send down the frame to all users
+
       .row.text-center
         //- TODO: Put up some placeholder text until first submit
         img.gifsocket(src="/image.gif")

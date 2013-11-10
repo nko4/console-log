@@ -20,7 +20,8 @@
     "shell-quote": "~1.4.0",
     "raw-body": "0.0.3",
     "express": "~3.4.4",
-    "jade": "~0.35.0"
+    "jade": "~0.35.0",
+    "marked": "~0.2.10"
   },
   "engines": {
     "node": "0.10.x"
