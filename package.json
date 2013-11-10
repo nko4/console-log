@@ -17,7 +17,8 @@
     "temporary": "0.0.5",
     "async": "~0.2.7",
     "which": "~1.0.5",
-    "shell-quote": "~1.4.0"
+    "shell-quote": "~1.4.0",
+    "raw-body": "0.0.3"
   },
   "engines": {
     "node": "0.10.x"

@@ -50,6 +50,8 @@ module.exports = function gifRepl (port) {
     });
   }
   prompt();
+
+  // TODO: Probably should do an on exit -> close listener
 };
 
 if (module.parent === null) {
