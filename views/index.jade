@@ -164,7 +164,7 @@ html
                   var dataStr = JSON.stringify([].slice.call(context.getImageData(0, 0, gifsocketWidth, gifsocketHeight).data));
                   // DEV: I could code this by hand but really not worth the trouble
                   $.post('/image/raw', dataStr);
-                  _gaq.push(['_trackEvent', 'Image uploaded']);
+                  _gaq.push(['_trackEvent', 'Image uploaded', 'Yep']);
                 };
                 img.onerror = function () {
                   alert('Error converting file to image');
