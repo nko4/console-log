@@ -1,4 +1,6 @@
 # console-log changelog
+0.19.2 - Removed dev console.logs
+
 0.19.1 - Tweaking README
 
 0.19.0 - Open sourced repository and purged deploy keys
