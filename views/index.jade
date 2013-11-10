@@ -18,11 +18,10 @@ html
         line-height: 24px;
       }
 
-      /* TODO: Make image full width of container (whatever that is) */
-      /* TODO: Adjust javascript width/height */
       .gifsocket {
+        /* #GIFSOCKET-DIMENSIONS */
         width: 600px;
-        height: 392px;
+        height: auto;
         background: #666;
         display: block;
         margin: 0 auto;
@@ -162,9 +161,9 @@ html
     script(src="/public/js/jquery.js")
     script.
       (function () {
-        // TODO: Adjust these with block
+        // #GIFSOCKET-DIMENSIONS
         var gifsocketWidth = 600;
-        var gifsocketHeight = 392;
+        var gifsocketHeight = 380;
 
         var $canvas = document.createElement('canvas');
         $canvas.width = gifsocketWidth;
