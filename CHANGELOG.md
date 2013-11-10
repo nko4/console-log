@@ -1,4 +1,6 @@
 # console-log changelog
+0.14.0 - Moved to string as transport for image data
+
 0.13.0 - Added drag and drop support
 
 0.12.0 - Added Google Analytics tracking to webpage
