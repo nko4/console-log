@@ -1,4 +1,6 @@
 # console-log changelog
+0.9.0 - Broke down GIFEncoder and making efficient buffering happen
+
 0.8.0 - Moved to single frame compile for performance boost
 
 0.7.0 - Implemented GET/POST server for posting arbitrary strings
