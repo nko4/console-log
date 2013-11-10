@@ -99,13 +99,10 @@ html
       /* TODO: Re-enable gifsocket */
 
       @media (max-width: 768px) {
-        /* .span2 */
-        .form-horizontal-phone label {
-          min-width: 23.076923076923077%;
-          *min-width: 23.023731587561375%;
+        .form-horizontal-phone {
+          padding-right: 20px;
         }
 
-        /* .span10 */
         .form-horizontal-phone input {
           width: 100%;
         }
@@ -140,25 +137,19 @@ html
             .span12
               // There is a server imposed max length of 4096 (implementation limitation), this is just to be nice.
               textarea#gifsocket-text.input-block-level(name="text", maxlength=4096) Hello World!
-          .form-inline.form-horizontal-phone
-            .row
-              .span12
-                p.row
-                  .span3
-                    label(for="foreground") Foreground:&nbsp;
-                    input.input-small(name="foreground", value="#BADA55", type="text")
-                p.row
-                  .span3
-                    label(for="background") Background:&nbsp;
-                    input.input-small(name="background", value="#000000", type="text")
-                p.row
-                  .span3
-                    label(for="font-size") Font size:&nbsp;
-                    input.input-small(name="font-size", value="30", type="text")
-                p.row
-                  .span3
-                    label(for="font-family") Font family:&nbsp;
-                    input.input-small(name="font-family", value="Impact", type="text")
+          .row.form-inline.form-horizontal-phone
+            p.span3
+              label(for="foreground") Foreground:&nbsp;
+              input.input-small(name="foreground", value="#BADA55", type="text")
+            p.span3
+              label(for="background") Background:&nbsp;
+              input.input-small(name="background", value="#000000", type="text")
+            p.span3
+              label(for="font-size") Font size:&nbsp;
+              input.input-small(name="font-size", value="30", type="text")
+            p.span3
+              label(for="font-family") Font family:&nbsp;
+              input.input-small(name="font-family", value="Impact", type="text")
 
           .row
             .span12
