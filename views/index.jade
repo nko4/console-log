@@ -18,6 +18,12 @@ html
         line-height: 24px;
       }
 
+      .btn-prominent {
+        font-size: 20px;
+        padding: 20px;
+        font-weight: bold;
+      }
+
       .gifsocket {
         /* #GIFSOCKET-DIMENSIONS */
         width: 600px;
@@ -66,12 +72,24 @@ html
         }
       }
 
+      /* These classes are totally improperly named. yey. */
       .push--top {
         margin-top: 60px;
       }
 
+      .push-half--top {
+        margin-top: 20px !important;
+      }
+
       .drag-entered {
         opacity: 0.5;
+      }
+
+      .block-center {
+        display: block;
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
       }
 
   body
@@ -102,26 +120,24 @@ html
             .span12
               // There is a server imposed max length of 4096 (implementation limitation), this is just to be nice.
               textarea#gifsocket-text.input-block-level(name="text", maxlength=4096) Hello World!
-          .row
-            .span12
-              p
-                button.btn.btn-block Submit
-
-          //- TODO: Reset background to 000000
-          //- TODO: Remove console.log of all data
           .row.form-inline
-            .span3
+            p.span3
               label(for="foreground") Foreground:&nbsp;
               input.input-small(name="foreground", value="#BADA55", type="text")
-            .span3
+            p.span3
               label(for="background") Background:&nbsp;
               input.input-small(name="background", value="#000000", type="text")
-            .span3
+            p.span3
               label(for="font-size") Font size:&nbsp;
               input.input-small(name="font-size", value="30", type="text")
-            .span3
+            p.span3
               label(for="font-family") Font family:&nbsp;
               input.input-small(name="font-family", value="Impact", type="text")
+
+          .row
+            .span12
+              p.push-half--top
+                button.span3.block-center.btn.btn-primary.btn-large.btn-prominent Submit
       div.push--top
         .section
           h2.text-center Explanation
@@ -231,7 +247,7 @@ html
           //- TODO: Continue with setup of this
           //- FileReaderJS.setupClipboard(document.body, opts);
           if (window.location.href.indexOf('localhost') !== -1) {
-            $.post('/image/text', 'text=hello\nworld&foreground=' + encodeURIComponent('#0FF'));
+            $.post('/image/text', 'text=hello\nworld&foreground=' + encodeURIComponent('#BADA55'));
           }
         }
 
