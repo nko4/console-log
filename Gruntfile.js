@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     'curl-dir': {
       'tmp/': [
         'http://getbootstrap.com/2.3.2/assets/bootstrap.zip',
-        'http://subtlepatterns.com/patterns/dimension.zip'
+        'http://subtlepatterns.com/patterns/ps_neutral.zip'
       ]
     },
     unzip: {
@@ -19,14 +19,14 @@ module.exports = function (grunt) {
         }
       },
       background: {
-        src: 'tmp/dimension.zip',
-        dest: 'tmp/dimension/'
+        src: 'tmp/ps_neutral.zip',
+        dest: 'tmp/ps_neutral/'
       }
     },
     copy: {
       background: {
-        src: 'tmp/dimension/dimension/dimension.png',
-        dest: 'public/img/dimension.png'
+        src: 'tmp/ps_neutral/ps_neutral/ps_neutral.png',
+        dest: 'public/img/background.png'
       }
     },
     watch: {
