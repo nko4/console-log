@@ -34,13 +34,18 @@ html
       /* 768px (42px col, 20px gutter) */
       /* 980px (60px col, 20px gutter) */
       /* 1200px (70px col, 30px gutter) */
-      /* TODO: This should be under a media query */
       .header h1 {
         font-size: 70px;
         line-height: 120px;
       }
 
-      /* TODO: Hide at lower resolutions */
+      @media (max-width: 767px) {
+        .header h1 {
+          font-size: 45px;
+          line-height: 60px;
+        }
+      }
+
       .github-ribbon {
         position: absolute;
         display: block;
