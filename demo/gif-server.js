@@ -63,7 +63,7 @@ module.exports = function gifRepl (port) {
       if (connections.length) {
         connections[0].getTextFrameData(text, function (err, dataArr) {
           connections.forEach(function writeToResponse (gifDuplex) {
-            gifDuplex.writeImageData(dataArr);
+            gifDuplex.writeFrameData(dataArr);
           });
 
           res.writeHead(204);
