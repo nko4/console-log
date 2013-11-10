@@ -65,8 +65,10 @@ module.exports = function writeTextToConnections (req, res) {
 
       // Parse out the image data
       console.log('PARSE-DATA: Parsing image data');
-      console.log(unparsedJson);
+      console.log(unparsedImageData);
       console.log('PARSE-DATA: Image data parsed');
+
+      return;
 
       // If we have firstConnections, write a header for them
       if (firstConnections.length) {
