@@ -34,9 +34,14 @@
         }
 
         // Capture the data url and save it for later
-        var retStr = JSON.stringify([].slice.call(context.getImageData(0, 0, params.width, params.height).data));
-        console.log(retStr);
-        window.retStr = retStr;
+        var data = context.getImageData(0, 0, params.width, params.height).data;
+        var i = 0;
+        var len = data.length;
+        var retArr = new Array(len);
+        for (; i < len; i++) {
+          retArr[i] = String.fromCharCode(data[i]);
+        }
+        window.retStr = retArr.join('');
       });
     </script>
   </body>
