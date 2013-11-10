@@ -15,7 +15,8 @@
       // TODO: We REALLY should not be using cookies for this x_x
       // TODO: Maybe we can evaluate JS pre-emptively and save to local storage or something?
       // TODO: or suck it up and deal with async
-      var encodedArg = document.cookie.replace('PARAMS=', ''),
+      // var encodedArg = document.cookie.replace('PARAMS=', ''),
+      var encodedArg = "%7B%22width%22%3A600%2C%22height%22%3A392%2C%22js%22%3A%22%5Cn%20%20%20%20%20%20context.font%20%3D%20'30px%20Impact'%3B%5Cn%20%20%20%20%20%20context.fillStyle%20%3D%20'%23FF00FF'%3B%5Cn%20%20%20%20%20%20context.fillText('hi'%2C%2050%2C%20100)%3B%5Cn%20%20%20%20%20%20cb(null)%3B%5Cn%20%20%20%20%22%7D",
           arg = decodeURIComponent(encodedArg),
           // arg = encodedArg,
           params = JSON.parse(arg);
@@ -34,6 +35,7 @@
 
         // Capture the data url and save it for later
         var retStr = JSON.stringify([].slice.call(context.getImageData(0, 0, params.width, params.height).data));
+        console.log(retStr);
         window.retStr = retStr;
       });
     </script>
