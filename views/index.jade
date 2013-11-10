@@ -60,7 +60,8 @@ html
           //- TODO: Put up some placeholder text until first submit
           img.gifsocket(src="/image.gif")
       div
-        form(method="POST", action="/image/text")
+        iframe.hidden(name="request-frame")
+        form(method="POST", action="/image/text", target="request-frame")
           .row
             .span12
               textarea.input-block-level(name="text") Hello World!
