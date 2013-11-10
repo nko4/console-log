@@ -46,6 +46,7 @@ module.exports = function writeTextToConnections (req, res) {
       console.log('GET-FRAME: Frame data fetched');
 
       if (err) {
+        console.error(err);
         res.writeHead(500, {
           'content-type': 'text/plain'
         });
