@@ -5,6 +5,27 @@ html
     //- TODO: Google Analytics on messages
     title Mothereffing GIFSockets!!!
     link(href="/public/css/bootstrap.min.css", rel="stylesheet", type="text/css", media="all")
-
+    link(href="/public/css/bootstrap-responsive.min.css", rel="stylesheet", type="text/css", media="all")
+    style.
+      /* TODO: Make image full width of container (whatever that is) */
+      .gifsocket {
+        width: 600px;
+        height: 392px;
+        background: #F0F;
+        display: block;
+      }
   body
-    p Test World
+    .container
+      .header.text-center
+        h1 Mothereffing GIFSockets!!!
+        h2 in JavaScript!!!
+      .row.text-center
+        //- TODO: Put up some placeholder text until first submit
+        img.gifsocket(src="/image.gif")
+      div
+        form(method="POST", action="/image/text")
+          .row
+            textarea.span12(name="text") Hello World!
+          .row
+            button.btn.span12 Submit
+
