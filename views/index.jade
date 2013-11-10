@@ -56,7 +56,8 @@ html
       .row.text-center
         p.span12.text-center
           //- TODO: Put up some placeholder text until first submit
-          img.gifsocket(src="/image.gif")
+          //- img.gifsocket(src="/image.gif")
+          .gifsocket(src="/image.gif")
       div
         iframe.hidden(name="request-frame", width=0, height=0)
         form#gifsocket-form(method="POST", action="/image/text", target="request-frame")
@@ -130,9 +131,18 @@ html
       (function () {
         if (document.getElementsByClassName && document.body.addEventListener) {
           var $gifsocket = document.getElementsByClassName('gifsocket')[0];
+          console.log($gifsocket);
           FileReaderJS.setupDrop($gifsocket, {
-            loadstart: function (e, file) {
-              console.log('hi', file);
+            on: {
+              loadstart: function (e, file) {
+                console.log('hi', file);
+              },
+              load: function (e, file) {
+                console.log('hi2', file);
+              },
+              skip: function (file) {
+                console.log('skip', file);
+              }
             }
           });
           //- FileReaderJS.setupClipboard(document.body, opts);
