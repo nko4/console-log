@@ -150,13 +150,19 @@ html
             on: {
               loadend: function (e, file) {
                 var target = e.target;
-                var img = target.result;
-                var context = $canvas.getContext('2d');
-                // TODO: Figure out how to clear it to transparent
-                context.fillStyle = '#000';
-                context.fillRect(0, 0, options.width, options.height);
-                context.drawImage(img, 0, 0);
-                console.log(context.getImageData(0, 0, options.width, options.height).data);
+                var img = new Image();
+                img.src = target.result;
+                img.onload = function () {
+                  var context = $canvas.getContext('2d');
+                  // TODO: Figure out how to clear it to transparent
+                  context.fillStyle = '#000';
+                  context.fillRect(0, 0, gifsocketWidth, gifsocketHeight);
+                  context.drawImage(img, 0, 0);
+                  console.log(context.getImageData(0, 0, gifsocketWidth, gifsocketHeight).data);
+                };
+                img.onerror = function () {
+                  alert('Error converting file to image');
+                };
               },
               error: function(e, file) {
                 alert('Error during process of error');
