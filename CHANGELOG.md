@@ -1,4 +1,6 @@
 # console-log changelog
+0.16.0 - Moved to phantomjs server over phantomjs child process
+
 0.15.0 - Removed intermediate image data parsing
 
 0.14.1 - Fix for Google Analytics on drag and drop
