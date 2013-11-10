@@ -19,6 +19,7 @@ html
       }
 
       /* TODO: Make image full width of container (whatever that is) */
+      /* TODO: Adjust javascript width/height */
       .gifsocket {
         width: 600px;
         height: 392px;
@@ -37,6 +38,10 @@ html
         margin-top: 60px;
       }
 
+      .drag-entered {
+        opacity: 0.5;
+      }
+
   body
     .container
       .header.text-center
@@ -45,9 +50,10 @@ html
         :markdown
           GIFSockets are animated [GIFs][] that never end. We keep an open connection and write new frames as they come in.
 
-          Try typing and submitting some text below!
+          Try submitting some text or [Drag n' Dropping] an image below!
 
           [GIFs]: http://en.wikipedia.org/wiki/Graphics_Interchange_Format
+          [Drag n' Dropping]: https://developer.mozilla.org/en-US/docs/DragDrop/Drag_and_Drop
 
       p.text-center
         iframe(src="//nodeknockout.com/iframe/console-log",
@@ -128,13 +134,29 @@ html
     script(src="/public/js/filereader.js")
     script.
       (function () {
+        var $canvas = document.createElement('canvas');
+        if ($canvas.getContext) {
+          // TODO: Write out to the style -> background url
+        }
+
+        // TODO: Adjust these with block
+        var gifsocketWidth = 600;
+        var gifsocketHeight = 392;
+
         if (document.getElementsByClassName && document.body.addEventListener) {
           var $gifsocket = document.getElementsByClassName('gifsocket')[0];
           FileReaderJS.setupDrop($gifsocket, {
             dragClass: 'drag-entered',
             on: {
               loadend: function (e, file) {
-                console.log('hi2', file);
+                var target = e.target;
+                var img = target.result;
+                var context = $canvas.getContext('2d');
+                // TODO: Figure out how to clear it to transparent
+                context.fillStyle = '#000';
+                context.fillRect(0, 0, options.width, options.height);
+                context.drawImage(img, 0, 0);
+                console.log(context.getImageData(0, 0, options.width, options.height).data);
               },
               error: function(e, file) {
                 alert('Error during process of error');
