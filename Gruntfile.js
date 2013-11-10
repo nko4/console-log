@@ -6,7 +6,8 @@ module.exports = function (grunt) {
     },
     'curl-dir': {
       'tmp/': [
-        'http://getbootstrap.com/2.3.2/assets/bootstrap.zip'
+        'http://getbootstrap.com/2.3.2/assets/bootstrap.zip',
+        'http://subtlepatterns.com/patterns/dimension.zip'
       ]
     },
     unzip: {
@@ -16,9 +17,17 @@ module.exports = function (grunt) {
         router: function (filepath) {
           return filepath.replace('bootstrap/', '');
         }
+      },
+      background: {
+        src: 'tmp/dimension.zip',
+        dest: 'tmp/dimension/'
       }
     },
     copy: {
+      background: {
+        src: 'tmp/dimension/dimension/dimension.png',
+        dest: 'public/img/dimension.png'
+      }
     },
     watch: {
       js: {
@@ -29,13 +38,14 @@ module.exports = function (grunt) {
   });
 
   // Load in grunt dependencies
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-curl');
   grunt.loadNpmTasks('grunt-zip');
 
   // Register dependency tasks
-  grunt.registerTask('install', ['curl-dir', 'unzip'/*, 'copy'*/]);
+  grunt.registerTask('install', ['curl-dir', 'unzip', 'copy']);
 
   // Register css and js tasks
   grunt.registerTask('lint', ['jshint']);
