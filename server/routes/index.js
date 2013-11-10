@@ -21,8 +21,9 @@ function renderView(filepath, locals) {
   return jade.render(file, locals);
 }
 
-var indexHtml = renderView(__dirname + '/../../views/index.jade', {});
+// TODO: Relocate indexHtml back to here
 exports.index = function (req, res) {
+var indexHtml = renderView(__dirname + '/../../views/index.jade', {});
   res.send(indexHtml);
 };
 

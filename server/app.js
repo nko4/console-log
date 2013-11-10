@@ -14,7 +14,7 @@ module.exports = function gifServer (port) {
   var app = express();
 
   // Host static files
-  app.use('/public', express['static'](__dirname + '/public'));
+  app.use('/public', express['static'](__dirname + '/../public'));
 
   // Host homepage
   app.get('/', routes.index);
@@ -30,6 +30,7 @@ module.exports = function gifServer (port) {
   // Host 404 page
   app.all('*', routes[404]);
 
+  // Listen and notify the outside world
   app.listen(port);
   console.log('gifsockets server is listening at http://127.0.0.1:' + port + '/');
 };
