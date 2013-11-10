@@ -1,4 +1,6 @@
 # console-log changelog
+0.23.0 - Added client side maxlength
+
 0.22.0 - Implemented multiline text
 
 0.21.0 - Moved to Bootstrap width GIF and added another media query for heading
