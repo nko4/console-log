@@ -55,9 +55,8 @@ html
                allowtransparency=true, width=115, height=25)
       .row.text-center
         p.span12.text-center
-          //- TODO: Put up some placeholder text until first submit
-          //- img.gifsocket(src="/image.gif")
-          .gifsocket(src="/image.gif")
+          //- TODO: Put up some <canvas> based placeholder text until first submit
+          img.gifsocket(src="/image.gif")
       div
         iframe.hidden(name="request-frame", width=0, height=0)
         form#gifsocket-form(method="POST", action="/image/text", target="request-frame")
